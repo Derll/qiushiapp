@@ -25,6 +25,30 @@
       		box3: {color: "#757575", url:"./img/dynamic.png"},
       		box4: {color: "#757575", url:"./img/my.png"}
       };
+      var SLIDERPIC=[
+        {key:"1", url: "./img/banner1.jpg"},
+        {key:"2", url: "./img/banner2.png"},
+        {key:"3", url: "./img/banner3.jpg"},
+      ];
+      var VIPLIST=[
+        { key:"1", url:"./img/vip1.jpg", name: "王思聪", tag: "网红、投资人、哲学家" },
+        { key:"2", url:"./img/vip2.jpg", name: "马薇薇", tag: "辩手、主持人" }
+      ];
+      var FOCUSLIST=[
+        {key:"1", url:"./img/focus1.jpg", name:"原研哉", title:"日本设计大师", issueNum:"700", fanNum:"5000" },
+        {key:"2", url:"./img/focus2.jpg", name:"蔡康永", title:"主持人", issueNum:"32", fanNum:"365" },
+        {key:"3", url:"./img/focus3.jpg", name:"黄轩", title:"演员", issueNum:"61", fanNum:"7000"}
+      ];
+      var DYNAMICLIST=[
+        {key:"1", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" },
+        {key:"2", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" }
+      ];
+
+      var USERDETAIL={ name: "林鹏", imgUrl: "./img/my-image.png", focusNum:"32", fanNum:"25", answerNum:"5", askNum:"32" };
+
+
+
+
       var IconStyle = React.createClass({
         handleClick: function(event){
           this.props.onTouchTap(
@@ -66,27 +90,230 @@
 
       var FlexSlider = React.createClass({
         render: function(){
+          var rows=[];
+          this.props.sliderPic.forEach(function(pic){
+            rows.push(
+              <li key={pic.key}><img src={pic.url} /></li>
+            );
+          }.bind(this));
           return (
             <div className="flexslider"> 
                   <ul className="slides"> 
-                    <li><img src="./img/banner1.jpg" /></li> 
-                    <li><img src="./img/banner2.png" /></li> 
-                    <li><img src="./img/banner3.jpg" /></li>
+                    {rows}
                   </ul> 
             </div> 
             );
         }
       });
+
+      var Gallery = React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.vipList.forEach(function(vip){
+            rows.push(
+              <div key={vip.key} className="gallery">
+                  <img src={vip.url} />
+                  <div className="nameTag">
+                    <div className="name">{vip.name}</div>
+                    <div className="tag">
+                      <img src="./img/tag-home.png" />{vip.tag}
+                    </div>
+                  </div>
+              </div>
+            );
+          }.bind(this));
+          return (
+            <div>
+              {rows}
+            </div>
+          );
+        }
+      });
+
+      var DynamicList = React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.dynamicList.forEach(function(dynamicAtomic){
+            rows.push(
+              <div key={dynamicAtomic.key} className="dynamicStructure">
+                <div className="dynamicHead">
+                  <img src={dynamicAtomic.url} />
+                  <div className="dynamicHead-1">
+                    <div className="dynamicHead-1-0">{dynamicAtomic.name}</div>
+                    <div className="dynamicHead-1-1">{dynamicAtomic.title}</div>
+                  </div>
+                </div>
+                <div className="dynamicBody">
+                  <p>Q: {dynamicAtomic.question}</p>
+                  <p>A: {dynamicAtomic.answer}</p>
+                </div>
+                <div className="dynamicBottom">
+                  <div className="dynamicBottom-0">
+                    <div className="dynamicBottom-0-0">追问</div>
+                    <div className="dynamicBottom-0-1">{dynamicAtomic.next_question}</div>
+                  </div>
+                  <p>A: {dynamicAtomic.next_answer}</p>
+                </div>
+              </div>
+              );
+          });
+
+          return (
+              <div>
+                {rows}
+              </div>
+              );
+        }
+      });
+
+      var FocusPage = React.createClass({
+      	render: function(){
+      		var rows_left=[];
+      		var rows_right=[];
+      		this.props.focusList.forEach(function(focusPerson){
+      			if(focusPerson.key%2==1){
+      				rows_left.push(
+      					<div key={focusPerson.key} className="focus_out_left">
+      						<div className="focus_head" >
+      							<img src={focusPerson.url} />
+	      						<div className="focus_bottom row" >
+	      							<div className="focus_left col-md-8 col-sm-8">
+	      								<div className="focus_name">{focusPerson.name}</div>
+	      								<div className="focus_title">{focusPerson.title}</div>
+	      							</div>
+	      							<div className="focus_right col-md-4 col-sm-4">
+	      								<div className="focus_issue">
+	      									<p>{focusPerson.issueNum}</p>
+	      									<p>问题</p>
+	      								</div>
+	      								<img src="./img/focus_decoration.gif"/>
+	      								<div className="focus_fan">
+	      									<p>{focusPerson.fanNum}</p>
+	      									<p>粉丝</p>
+	      								</div>
+	      							</div>
+	      						</div>
+      						</div>
+      					</div>
+      				);
+      			}else{
+      				rows_right.push(
+      					<div key={focusPerson.key} className="focus_out_right">
+      						<div className="focus_head" >
+      							<img src={focusPerson.url} />
+	      						<div className="focus_bottom row" >
+	      							<div className="focus_left col-md-8 col-sm-8">
+	      								<div className="focus_name">{focusPerson.name}</div>
+	      								<div className="focus_title">{focusPerson.title}</div>
+	      							</div>
+	      							<div className="focus_right col-md-4 col-sm-4">
+	      								<div className="focus_issue">
+	      									<p>{focusPerson.issueNum}</p>
+	      									<p>问题</p>
+	      								</div>
+	      								<img src="./img/focus_decoration.gif"/>
+	      								<div className="focus_fan">
+	      									<p>{focusPerson.fanNum}</p>
+	      									<p>粉丝</p>
+	      								</div>
+	      							</div>
+	      						</div>
+      						</div>
+      					</div>
+      				);
+      			}
+      		}.bind(this));
+      		return (
+      			<div>
+	      			<div id="focus" className="span1">
+	                  <p>全 部</p>
+	                </div>
+	      			<div className="rows row">
+	      				<div className="rows_left col-md-6 col-sm-6 ">{rows_left}</div>
+	      				<div className="rows_right col-md-6 col-sm-6">{rows_right}</div>
+	      			</div>
+      			</div>
+      		);
+      	}
+      });
+
+      var UserDetail = React.createClass({
+        render: function(){
+          return(
+            <div className="my-detail">
+              <div className="my-head">
+                <img src={this.props.userDetail.imgUrl} />
+                <p>林鹏</p>
+              </div>
+              <div className="tab-bar">
+                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.focusNum}</div><p>关注</p></div>
+                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.fanNum}</div><p>粉丝</p></div>
+                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.answerNum}</div><p>回答</p></div>
+                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.askNum}</div><p>提问</p></div>
+              </div>
+              <ul className="menu-list">
+                <li>
+                  <img src="./img/my-personal.png" className="imgTag" />
+                  <div>个人中心</div>
+                  <img src="./img/my-right.png" className="imgRight" />
+                </li>
+                <li>
+                  <img src="./img/my-reserve.png" className="imgTag" />
+                  <div>我的收藏</div>
+                  <img src="./img/my-right.png" className="imgRight" />
+                </li>
+                <li>
+                  <img src="./img/my-proposal.png" className="imgTag" />
+                  <div>我的提问</div>
+                  <img src="./img/my-right.png" className="imgRight" />
+                </li>
+                <li>
+                  <img src="./img/my-answer.png" className="imgTag" />
+                  <div>我的回答</div>
+                  <img src="./img/my-right.png" className="imgRight" />
+                </li>
+                <li>
+                  <img src="./img/my-fedback.png" className="imgTag" />
+                  <div>我要反馈</div>
+                  <img src="./img/my-right.png" className="imgRight" />
+                </li>
+              </ul>
+            </div>
+            );
+        }
+      });
+
       var ContentBox = React.createClass({
         render: function(){
           return(
-            <div>
+            <div className="contentBox">
               <div ref="home">
-                <FlexSlider />
+                <FlexSlider sliderPic={SLIDERPIC} />
+                <div className="span1">
+                  <p>人气推荐</p>
+                </div>
+                <div className="row" id="snacks">
+                  <div className="col-md-4 col-sm-4">
+                      <p>分类</p>
+                  </div>
+                  <div className="col-md-4 col-sm-4">
+                      <p>排序</p>
+                  </div>
+                  <div className="col-md-4 col-sm-4">
+                      <p>筛选</p>
+                  </div>
+                </div>
+                <Gallery vipList={VIPLIST} />
               </div>
-              <div ref="focus">关注</div>
-              <div ref="dynamic">动态</div>
-              <div ref="my">我的</div>
+              <div ref="focus">
+                  <FocusPage focusList={FOCUSLIST} />
+              </div>
+              <div ref="dynamic" className="dynamicClass">
+                  <DynamicList dynamicList={DYNAMICLIST} />
+              </div>
+              <div ref="my">
+                  <UserDetail userDetail={USERDETAIL} />
+              </div>
            </div>
          );
         },
@@ -139,7 +366,7 @@
               my.style.display="none";
             }else if(this.props.boxNum==4){
               home.style.display="none";
-             focus.style.display="none";
+              focus.style.display="none";
               dynamic.style.display="none";
               my.style.display="block";
             }

@@ -1,17 +1,73 @@
+@font-face {
+
+font-style:normal;
+font-weight:200;
+src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-light.woff") format("woff"), url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-light.ttf") format("truetype");
+*src:url('');
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+/* IE8 and Below
+----------------- */
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-light.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-light.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-text.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-text.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-semibold.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+@font-face {
+*
+*src:url("http://www.apple.com/wss/fonts/PingHei/v1/PingHei-bold.eot?") format("eot");
+/* Copyright (c) 2000-2008, Changzhou SinoType Technology Co., Ltd. All rights reserved. */
+}
+
+
+
 a:hover{ 
 	text-decoration:none;
 	cursor: pointer;
 }
 
-.body{
+html{
+	width: 100%;
+	height: 100%;
+}
+
+body{
+	width: 100%;
+	height: 100%;
+}
+
+.outSider{
+	height: 100%;
 	width:100%;
 }
 
 #container {
 	width: 100%;
+	height: 100%;
 }
 
 .iconStyle{
+	padding-top: 10px;
 	display: inline;
 	float: left;
 	text-align: center;
@@ -19,13 +75,316 @@ a:hover{
 }
 
 .iconStyle .categoryWord{
-	font-size: 22px;
+	font-size: 28px;
+}
+
+.contentBox{
+	width: 100%;
+	height: 100%;
+	z-index: 0;
 }
 
 .slideBar{
-	width: 100%;
+	height: 100px;
+	width: 102%;
 	bottom: 0px;
 	position: fixed;
-	z-index: 1;
 	background: white;
+	z-index:99;
+}
+.span1{
+	width: 100%;
+	height: 126px;
+	border-bottom: 2px solid gray;
+}
+.span1 p{
+	padding-top: 34px;
+	color: #333333;
+	font-size: 44px;
+	height: 44px;
+	font-family: "PingHei";
+	padding-left: 41.25%;
+}
+
+#snacks{
+	width: 100%;
+	height: 80px;
+}
+
+#snacks p{
+	padding-top: 24px;
+	padding-left: 36%;
+	font-family: "PingHei";
+	color: #666666;
+	font-size: 44px;
+}
+
+.gallery{
+	width: 100%;
+	font-family: "PingHei";
+	font-size: 50px;
+	position: relative;
+	color: white;
+}
+
+.gallery img{
+	width: 100%;
+}
+
+.nameTag{
+	position: absolute;
+	z-index:2;
+	left: 35%;
+	top: 45%;
+	translateX(-50%);
+	translateY(-50%);
+}
+
+.name{
+	padding-left: 80px;
+}
+
+.tag{
+	font-size: 28px;
+}
+
+.tag img{
+	width: 40px;
+	height: 40px;
+}
+
+.focus_out_left{
+	position:relative;
+	font-family: "PingHei";
+	color:white;
+	margin-left:auto;
+}
+
+.focus_out_right{
+	position:relative;
+	font-family: "PingHei";
+	color:white;
+	margin-left:auto;
+}
+
+.focus_head{
+	height:100%;
+	width:100%;
+}
+
+.focus_head img{
+	position:relative;
+	width:98%;
+	height:100%;
+}
+
+.focus_bottom{
+	position:absolute;
+	width: 98%;
+	margin-left:0px;
+	bottom:0px;
+	background:black;
+	filter:alpha(opacity=50);  
+    -moz-opacity:0.5;  
+    -khtml-opacity: 0.5;  
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.focus_name{
+	padding-top:10px;
+	font-size:30px;
+	height:55px;
+}
+
+.focus_title{
+	top:40px;
+	font-size:21px;
+}
+
+.focus_right{
+	font-size:18px;
+	margin-top:24px;
+}
+
+.focus_issue{
+	display:inline;
+	float:left;
+}
+
+.focus_right img{
+	margin-left:20px;
+	display:inline;
+	float:left;
+	width:2px;
+}
+
+.focus_fan{
+	margin-left:20px;
+	display:inline;
+	float:left;
+}
+
+#focus p{
+	padding-left 45%: 
+}
+
+.dynamicClass{
+	background-color: #f0f0f0;
+	width: 100%;
+	height: 100%;
+	padding-top:70px;
+	font-family: "PingHei";
+}
+
+.dynamicStructure{
+	background-color: white;
+	width: 100%;
+	height: 680px;
+	margin-top: 30px;
+}
+
+.dynamicHead{
+	clear: both;
+	height: 100px;
+	width: 100%;
+}
+
+.dynamicHead img{
+	padding-top: 56px;
+	padding-left: 40px;
+	float: left;
+}
+
+.dynamicHead-1 {
+	float: left;
+	margin-top:72px;
+	margin-left:80px;
+}
+
+.dynamicHead-1-0 {
+	font-size: 48px;
+}
+
+.dynamicHead-1-1 {
+	font-size: 30px;
+	color: #666666;
+}
+
+.dynamicBody{
+	clear: both;
+	font-size: 40px;
+	color: #666666;
+	margin-left: 40px;
+	padding-top:20px;
+}
+
+.dynamicBody p{
+	margin-top:26px;
+}
+
+.dynamicBottom{
+	font-size: 40px;
+	color: #666666;
+	margin-left: 60px;
+	padding-top:20px;
+}
+
+.dynamicBottom-0-0{
+	float: left;
+	background-color: #0D964C;
+	color: white;
+}
+
+.dynamicBottom-0-1{
+	float: left;
+	margin-left: 44px;
+	color: #E9D055;
+}
+
+.dynamicBottom p{
+	clear:both;
+	padding-top: 20px;
+}
+
+.my-detail{
+	width:100%;
+	height:100%;
+	font-family: "PingHei";
+}
+
+.my-head{
+	width: 100%;
+	height: 540px;
+	background-color:#0A974C;
+}
+
+.my-head img{
+	margin-left: 400px;
+	margin-top: 108px;
+}
+
+.my-head p{
+	font-size: 60px;
+	color: white;
+	margin-top:30px;
+	margin-left: 445px;
+}
+
+.tab-bar{
+	width: 100%;
+	height:208px;
+	margin-top:28px;
+}
+
+.tab-bar-0{
+	width: 25%;
+	height: 100%;
+	border: 2px solid #dddddd;
+	float: left;
+}
+
+.tab-bar-0-0{
+	font-size: 40px;
+	margin-left: 37%;
+	margin-top: 30px;
+}
+
+.tab-bar div p{
+	font-size: 40px;
+	margin-left: 30%;
+	margin-top: 25px;
+}
+
+.menu-list{
+	width: 100%;
+	height: 100%;
+}
+
+.menu-list li{
+	clear:both;
+	list-style: none;
+	list-style-position:inside;
+	width:100%;
+	height: 176px;
+	border-bottom: 2px solid #dddddd;
+}
+
+.imgTag{
+	float: left;
+	margin-top: 64px;
+}
+
+.imgRight{
+	float:left;
+	margin-top: 70px;
+	margin-left:480px;
+}
+
+
+.menu-list li div{
+	float:left;
+	font-size: 48px;
+	margin-top: 64px;
+	margin-left: 60px;
 }
