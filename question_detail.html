@@ -5,7 +5,186 @@
     <title>求士</title>
     <script src="./react-15.1.0/build/react.js"></script>
     <script src="./react-15.1.0/build/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="./js/browser.min.js"></script>
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
   </head>
+  <body>
+    <div id="container">
+      
+    </div>
+    <script type="text/babel">
+
+      var COMMENTLIST=[
+        {key:"1", name:"谢耳朵", url:"./img/dynamic1.png", time:"2016-1-29", like_num:"80", text:"欲望是什么，就是你有想法的时候"},
+        {key:"2", name:"谢耳朵", url:"./img/dynamic1.png", time:"2016-1-29", like_num:"30", text:"欲望是什么，就是你有想法的时候"}
+      ];
+
+      var DYNAMICQUESTION={
+        url:"./img/dynamic1.png", name:"徐霞客", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义",commentNum:"43", watchNum:"27"
+      }
+
+      var DYNAMICLIST=[
+        {key:"1",  next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" },{key:"2", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" }
+      ];
+
+
+       var DynamicList = React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.dynamicList.forEach(function(dynamicAtomic){
+            rows.push(
+              
+                <div key={dynamicAtomic.key} className="dynamicBottom">
+                  <div className="dynamicBottom-0">
+                    <div className="dynamicBottom-0-0">追问</div>
+                    <div className="dynamicBottom-0-1">{dynamicAtomic.next_question}</div>
+                  </div>
+                  <p>A: {dynamicAtomic.next_answer}</p>
+                </div>
+              );
+          });
+
+          return (
+              <div  className="dynamicStructure">
+                <div className="dynamicHead">
+                  <img src={this.props.dynamicQuestion.url} />
+                  <div className="dynamicHead-1">
+                    <div className="dynamicHead-1-0">{this.props.dynamicQuestion.name}</div>
+                    <div className="dynamicHead-1-1">{this.props.dynamicQuestion.title}</div>
+                  </div>
+                </div>
+                <div className="dynamicBody">
+                  <p>Q: {this.props.dynamicQuestion.question}</p>
+                  <p>A: {this.props.dynamicQuestion.answer}</p>
+                </div>
+                {rows}
+                <div className="dynamicStatistic">
+                    <img src="./img/question_detail_commentNum.png" />
+                    <div>{this.props.dynamicQuestion.commentNum}</div>
+                    <img src="./img/question_detail_watch.png" />
+                    <div>{this.props.dynamicQuestion.watchNum}</div>
+                </div>
+                <div className="dynamicEnd"></div>
+            </div>
+              );
+        }
+      });
+
+      var CommentAtomic=React.createClass({
+        handleClick: function(){
+          var num=this.props.num;
+          this.props.onChangeBig(num);
+          /* 第一部分管数值变化 */
+          /* 
+              if(this.state.fg==1) this.setState({fg:0, num--});
+              else this.setState({fg:0, num++});
+              服务器端修改对应的值。
+           */
+          /**/
+        },
+        /* 第二部分管图片显示 */
+        /* 
+
+        componentDidUpdate: function(){
+            if(this.state.fg==1) this.refs.like.src="./img/question_detail_like_on.png";
+            else this.refs.like.src="./img/question_detail_like.png";
+
+        },
+
+        componentDidUpdate: function(){
+            if(this.state.fg==1) this.refs.like.src="./img/question_detail_like_on.png";
+            else this.refs.like.src="./img/question_detail_like.png";
+        },
+
+         */
+
+        /* 
+
+        getInitialState: function(){
+            var flag=0;
+            if(this.props.commentMsg.userID中有当前用户ID）{
+                flag=1;
+            }
+            else flag=0;
+
+            return {
+                fg: flag,
+                num: this.props.commentMsg.like_num
+            };
+        },
+
+        */
+        render: function(){
+          
+          return (
+                <div>
+                <div className="commentBox-0">
+                  <img src={this.props.commentMsg.url} />
+                  <div className="commentBox-0-1">
+                    <div className="commentBox-0-1-0">{this.props.commentMsg.name}</div>
+                    <div className="commentBox-0-1-1">{this.props.commentMsg.time}</div>
+                  </div>
+                  <div className="commentBox-0-2" onClick={this.handleClick}>
+                    <img ref="like" src="./img/question_detail_like.png" />
+                    <div className="commentBox-0-2-1">{this.props.commentMsg.like_num}</div>
+                  </div>
+                </div>
+                <div className="commentBox-1">{this.props.commentMsg.text}</div>
+              </div>
+            );
+        }
+      });
+
+      var CommentBox=React.createClass({
+        bigChange: function(num){
+          this.props.onChangeContent(num);
+        },
+        render: function(){
+          var rows=[];
+          this.props.commentlist.forEach(function(coMent){
+            rows.push(
+              <CommentAtomic key={coMent.key} num={coMent.key}  commentMsg={coMent} />
+              );
+          });
+          return (
+            <div className="commentBox" onChangeBig={this.bigChange}>
+              <div className="commentTitle">全部评论</div>
+              {rows}
+            </div>
+            );
+        }
+      });
+
+      var DetailBox=React.createClass({
+        handleChange: function(num){
+          return ;
+          /* 首先寻找该num的文件，          */
+        },
+        getInitialState: function(){
+          return {
+            commentlist: COMMENTLIST
+          }
+        },
+        render: function(){
+          return (
+            <div>
+                <DynamicList dynamicQuestion={DYNAMICQUESTION}  dynamicList={DYNAMICLIST} onChangeContent={this.handleChange} />
+                <CommentBox  commentlist={this.state.commentlist} />
+                <div className="ask_comment">
+                  <img id="img1" src="./img/question_detail_ask.png" />
+                  <img id="img2" src="./img/question_detail_comment.png" />
+                </div>
+            </div>
+            );
+        }
+      });
+
+      ReactDOM.render(
+        <DetailBox />,
+        document.getElementById("container")
+      );
+    </script>
+    <link rel="stylesheet" ty994929pe="text/css" href="css/question_detail.css">
+  </body>
+</html>

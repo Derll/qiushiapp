@@ -5,7 +5,9 @@
     <title>求士</title>
     <script src="./react-15.1.0/build/react.js"></script>
     <script src="./react-15.1.0/build/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+    <script src="./js/sails.io.js"></script>
+    <script src="./js/browser.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
@@ -19,6 +21,8 @@
     <div id="container">
     </div>
     <script type="text/babel">
+      io.sails.url="http://localhost:1337";
+
       var COLORBOX={
       		box1: {color: "#0A974A", url:"./img/index-on.png"},
       		box2: {color: "#757575", url:"./img/focus.png"},
@@ -292,7 +296,7 @@
                 <div className="span1">
                   <p>人气推荐</p>
                 </div>
-                <div className="row" id="snacks">
+                { /* <div className="row" id="snacks">
                   <div className="col-md-4 col-sm-4">
                       <p>分类</p>
                   </div>
@@ -301,8 +305,8 @@
                   </div>
                   <div className="col-md-4 col-sm-4">
                       <p>筛选</p>
-                  </div>
-                </div>
+                  </div> 
+                </div> */ }
                 <Gallery vipList={VIPLIST} />
               </div>
               <div ref="focus">

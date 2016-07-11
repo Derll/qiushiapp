@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>求士</title>
+    <script src="./react-15.1.0/build/react.js"></script>
+    <script src="./react-15.1.0/build/react-dom.js"></script>
+    <script src="./js/browser.min.js"></script>
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+  	<div id="container">
+  		
+  	</div>
+  	<script type="text/babel">
+  			var QUESTIONRESERVED=[
+  				{key:"1", url:"./img/dynamic1.png", name:"喜剧报道者", time:"2016年12月2日", content:"如何把握互联网机遇？", question_num:"3", comment_num:"34"},
+  				{key:"2", url:"./img/dynamic1.png", name:"喜剧报道者", time:"2016年12月2日", content:"如何把握互联网机遇？", question_num:"3", comment_num:"34"},
+  			];
+
+  			var CommentBox=React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.commentlist.forEach(function(commentMsg){
+            rows.push(
+              <div key={commentMsg.key}>
+                <div className="commentBox-0">
+                  <img src={commentMsg.url} />
+                  <div className="commentBox-0-1">
+                    <div className="commentBox-0-1-0">{commentMsg.name}</div>
+                  </div>
+                  <div className="commentBox-0-2">
+                    <div className="commentBox-0-2-1">{commentMsg.time}</div>
+                  </div>
+                </div>
+                <div className="commentBox-1">{commentMsg.content}</div>
+                <div className="commentBottom">
+                	<img src="./img/question_reserved_former.png" />
+                    <div>{commentMsg.question_num}</div>
+                    <img src="./img/question_reserved_comment.png" />
+                    <div>{commentMsg.comment_num}</div>
+                </div>
+                <div className="commentEnd"></div>
+              </div>
+              );
+          });
+          return (
+          	<div>{rows}</div>
+            );
+        }
+      });
+
+  			var QuestionList=React.createClass({
+  				render: function(){
+  					return (
+			            <div>
+			            <input type="button" value="收藏的问题" id="button" />
+			            <CommentBox commentlist={QUESTIONRESERVED}/>
+			            </div>
+			            );
+  				}
+  			});
+
+  			ReactDOM.render(
+		        <QuestionList />,
+		        document.getElementById("container")
+		      );
+  	</script>
+  	<link rel="stylesheet" type="text/css" href="css/question_reserved.css">
+  </body>
+</html>

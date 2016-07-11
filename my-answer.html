@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>求士</title>
+    <script src="./react-15.1.0/build/react.js"></script>
+    <script src="./react-15.1.0/build/react-dom.js"></script>
+    <script src="./js/browser.min.js"></script>
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+  	<div id="container">
+  		
+  	</div>
+  	<script type="text/babel">
+
+  			var QUESTIONUNRESERVED=[
+          {key:"1", url:"./img/dynamic1.png", name:"喜剧报道者", whether_answer:"已回答", time:"2016年12月2日", content:"如何看待网红"},
+          {key:"2", url:"./img/dynamic1.png", name:"喜剧报道者", whether_answer:"已回答", time:"2016年12月2日", content:"如何把握互联网机遇？"}
+        ];
+
+        var QUESTIONRESERVED=[
+          {key:"1", url:"./img/dynamic1.png", name:"喜剧报道者", whether_answer:"已回答", time:"2016年12月2日", content:"如何看待网红", my_answer:"网络红人就是指那些奇奇怪怪", question_num:"3", comment_num:"34", view_num:"43" },
+          {key:"2", url:"./img/dynamic1.png", name:"喜剧报道者", whether_answer:"已回答", time:"2016年12月2日", content:"如何把握互联网机遇？", my_answer:"网络红人就是指那些奇奇怪怪", question_num:"3", comment_num:"34", view_num:"43" }
+        ];
+
+        
+        var TabBar=React.createClass({
+          handleClick: function(num){
+              if(this.props.boxNum==1) return ;
+              else {this.props.onChangeBox()};
+
+          },
+          handleClick2: function(num){
+              if(this.props.boxNum==2) return ;
+              else this.props.onChangeBox();
+
+          },
+          componentDidUpdate: function(){
+            var button1=this.refs.button1;
+            var button2=this.refs.button2;
+            if(this.props.boxNum==1){
+              button1.style.color="white";
+              button1.style.backgroundColor="#0A964C";
+              button1.style.border="none";
+              button2.style.color="#0A964C";
+              button2.style.backgroundColor="white";
+              button2.style.border="2px solid #0A964C";
+            }
+            else{
+              button2.style.color="white";
+              button2.style.backgroundColor="#0A964C";
+              button2.style.border="none";
+              button1.style.color="#0A964C";
+              button1.style.backgroundColor="white";
+              button1.style.border="2px solid #0A964C";
+            }
+          },
+          render: function(){
+            return(
+              <div>
+                <input type="button" value="未回答" id="button1" onClick={this.handleClick} ref="button1" style={{color: "white",
+  backgroundColor: "#0A964C",border: "none"}}/>
+                <input type="button" value="已回答" id="button2" onClick={this.handleClick2} ref="button2" style={{color: "#0A964C",
+  backgroundColor: "white",border: "2px solid #0A964C"}}/>
+              </div>
+              );
+          }
+        });
+
+var CommentBox=React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.commentlist.forEach(function(commentMsg){
+            rows.push(
+              <div key={commentMsg.key}>
+                <div className="commentBox-0">
+                  <img src={commentMsg.url} />
+                  <div className="commentBox-0-1">
+                    <div className="commentBox-0-1-0">{commentMsg.name}</div>
+                  </div>
+                  <div className="commentBox-0-2">
+                    <div className="commentBox-0-2-1">{commentMsg.time}</div>
+                    <div className="commentBox-0-2-2">{commentMsg.whether_answer}</div>
+                  </div>
+                </div>
+                <div className="commentBox-1">Q:{commentMsg.content}</div>
+                <div className="commentBox-2">A:{commentMsg.my_answer}</div>
+                <div className="commentBottom">
+                  <img src="./img/question_reserved_former.png" />
+                    <div>{commentMsg.question_num}</div>
+                    <img src="./img/question_reserved_comment.png" />
+                    <div>{commentMsg.comment_num}</div>
+                    <img src="./img/question_detail_watch.png" />
+                    <div>{commentMsg.view_num}</div>
+                </div>
+                <div className="commentEnd"></div>
+              </div>
+              );
+          });
+          return (
+            <div>{rows}</div>
+            );
+        }
+      });
+
+        var QuestionBox=React.createClass({
+            render: function(){
+            var rows=[];
+            this.props.questionlist.forEach(function(commentMsg){
+              rows.push(
+                <div key={commentMsg.key}>
+                  <div className="commentBox-0">
+                    <img src={commentMsg.url} />
+                    <div className="commentBox-0-1">
+                      <div className="commentBox-0-1-0">{commentMsg.name}</div>
+                    </div>
+                    <div className="commentBox-0-2">
+                      <div className="commentBox-0-2-1">{commentMsg.time}</div>
+                    </div>
+                  </div>
+                  <div className="commentBox-1">Q:{commentMsg.content}</div>
+                  
+                </div>
+                );
+            });
+            return (
+              <div>{rows}</div>
+              );
+          }
+        });
+
+  			var QuestionList=React.createClass({
+          handleChange: function(){
+            if(this.state.boxNum==1) this.setState({boxNum:"2"});
+            else this.setState({boxNum:"1"});
+          },
+          getInitialState: function() {
+            return {
+              boxNum: "1"
+            };
+          },
+          componentDidUpdate: function(){
+            var tab1=this.refs.tab1;
+            var tab2=this.refs.tab2;
+            if(this.state.boxNum==1) {
+              tab1.style.display="block";
+              tab2.style.display="none";
+            }
+            else{
+              tab2.style.display="block";
+              tab1.style.display="none";
+            }
+          },
+  				render: function(){
+  					return (
+			            <div>
+                    <TabBar boxNum={this.state.boxNum} onChangeBox={this.handleChange}/>
+                    <div style={{display:"block"}} ref="tab1" >
+                      <QuestionBox questionlist={QUESTIONUNRESERVED}/>
+                    </div>
+                    <div style={{display:"none"}} ref="tab2" >
+			                 <CommentBox commentlist={QUESTIONRESERVED}/>
+                    </div>
+			            </div>
+			            );
+  				}
+  			});
+
+  			ReactDOM.render(
+		        <QuestionList />,
+		        document.getElementById("container")
+		      );
+  	</script>
+  	<link rel="stylesheet" type="text/css" href="css/my-answer.css">
+  </body>
+</html>

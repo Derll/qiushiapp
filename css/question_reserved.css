@@ -1,0 +1,87 @@
+#button{
+	width: 98%;
+	font-size:60px;
+	color:white;
+	background-color:#0A964C;
+	border: none;
+	margin-left:1%;
+}
+
+
+.commentBox{
+	background-color: white;
+	margin-top: 50px;
+	width: 100%;
+	font-family: "PingHei";
+}
+
+.commentBox-0{
+	border-bottom: 2px solid #dddddd;
+}
+
+.commentBox-0 img{
+	padding-top: 36px;
+	padding-left: 40px;
+	float: left;
+}
+
+.commentBox-0-1{
+	float:left;
+	margin-top:72px;
+	margin-left:24px;
+}
+
+.commentBox-0-1-0{
+	font-size: 40px;
+	color: #0A964C;
+}
+
+
+.commentBox-0-2{
+	float:left;
+	margin-left:200px;
+	margin-top:10px;
+}
+
+
+.commentBox-0-2-1{
+	float:left;
+	color:#999999;
+	font-size:40px;
+	padding-top:60px;
+	left: 14px;
+}
+
+
+
+.commentBox-1{
+	clear: both;
+	font-size:40px;
+	padding-bottom: 30px;
+	padding-top:20px;
+	margin-left:180px;
+	color: #333333;
+}
+
+.commentBottom{
+	padding-left:650px;
+}
+
+
+.commentBottom img{
+	float:left;
+	margin-left:10px;
+}
+
+.commentBottom div{
+	float:left;
+	margin-top:15px;
+	font-size:40px;
+	margin-left:10px;
+	color:#999999;
+}
+
+.commentEnd{
+	clear:both;
+	padding-bottom:30px;
+}
