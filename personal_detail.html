@@ -300,11 +300,8 @@
             return ;
           }
           alert("谢谢您的提问，请等待回答消息");
-          io.socket.get('/question/create?to='+this.state.userId+'&question='+this.state.value, {}, (result, jwr) => {
-
-          });
           /* 把问题存储进个人提问，别人待回答 */
-            this.setState({ value: "" });
+          this.setState({ value: "" });
           this.refs.writeComment.style.display="none";
           this.refs.goodButton.style.display="block";
         },
