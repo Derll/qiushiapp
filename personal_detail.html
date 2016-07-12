@@ -16,7 +16,7 @@
     <script type="text/babel">
 
       var PERSONINFO={
-        backimg:"./img/personal_detail/background.png", headimg:"./img/personal_detail/hosthead.png", name:"王思聪", answernum:"34", followernum:"2000", tag:"网红、投资人、哲学家"
+        backimg:"./img/personal_detail/background.png", headimg:"./img/personal_detail/hosthead.png", name:"王思聪", answernum:"34", followernum:2000, tag:"网红、投资人、哲学家"
       }
 
       var PERSONCONTENT={
@@ -40,26 +40,52 @@
         {key: "1", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
         {key: "2", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
         {key: "3", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
-        {key: "4", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"}
+        {key: "4", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "5", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "6", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "7", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "8", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "9", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "10", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"}
       ];
 
       var PersonBack=React.createClass({
+        handleClick: function(){
+          this.refs.focusbtn.style.display="none";
+          this.refs.focusbtn_off.style.display="inline";
+          var temp=this.state.personInfo;
+          temp.followernum=this.state.personInfo.followernum+1;
+          this.setState({personInfo: temp});
+        },
+        handleClick2:function(){
+          this.refs.focusbtn.style.display="inline";
+          this.refs.focusbtn_off.style.display="none";
+          var temp=this.state.personInfo;
+          temp.followernum=this.state.personInfo.followernum-1;
+          this.setState({personInfo: temp});
+        },
+        getInitialState:function(){
+          return {
+            personInfo: PERSONINFO
+          };
+        },
         render: function(){
           return (
             <div className="personback">
               <div>
-                <img src={this.props.personInfo.backimg} id="backimg" />
+                <img src={this.state.personInfo.backimg} id="backimg" />
               </div>
               <div className="personbackinfo">
-                <img src={this.props.personInfo.headimg} id="headimg" />
-                <div id="hostname">{this.props.personInfo.name}</div>
+                <img src={this.state.personInfo.headimg} id="headimg" />
+                <div id="hostname">{this.state.personInfo.name}</div>
                 <div className="answernum_followernum">
-                  <div>已回答 {this.props.personInfo.answernum}   |   粉丝 {this.props.personInfo.followernum} </div>
+                  <div>已回答 {this.state.personInfo.answernum}   |   粉丝 {this.state.personInfo.followernum} </div>
                 </div>
-                <button className="focusbtn">+关注</button>
+                <button ref="focusbtn" className="focusbtn" style={{display:"inline"}} onClick={this.handleClick}>+关注</button>
+                <button ref="focusbtn_off" className="focusbtn_off" style={{display:"none"}} onClick={this.handleClick2}>已关注</button>
                 <div className="tag">
                   <img src="./img/personal_detail/tag.png" id="tagimg" />
-                  {this.props.personInfo.tag}
+                  {this.state.personInfo.tag}
                 </div>
               </div>
             </div>
@@ -133,10 +159,24 @@
       });
 
       var AskBox=React.createClass({
+        handleClick: function(){
+          this.refs.clickopen.style.display="none";
+          this.setState({ askList: ASKLIST });
+        },
+        getInitialState:function(){
+          var temp=[];
+          ASKLIST.forEach(function(askMsg){
+            if(askMsg.key>5) return ;
+            temp.push(askMsg);
+          });
+          return {
+            askList: temp
+          };
+        },
         render: function(){
           var rows_ans=[];
-          this.props.askList.forEach(function(askMsg) {
-            if(askMsg.key<3){
+          this.state.askList.forEach(function(askMsg) {
+            if(askMsg.key<4){
               rows_ans.push(
               <div key={askMsg.key}>
                 <div className="askercontainer">
@@ -188,6 +228,7 @@
               <div  className="boxcontent">
                 {rows_ans}
               </div>
+              <div ref="clickopen" className="clickopen" onClick={this.handleClick} >点击展开</div>
             </div>
             )
         }
@@ -226,12 +267,11 @@
         render: function(){
           return (
             <div>
-              <PersonBack personInfo={PERSONINFO} />
+              <PersonBack />
               <PersonIntro personContent={PERSONCONTENT} />
               <QuestionBox  />
-              <AskBox askList={ASKLIST} />
+              <AskBox  />
               <div className="ask_comment">
-                <div className="clickopen">点击展开</div>
                 <div ref="goodButton" className="askComment">
                   <img id="img1" src="./img/personal_detail/askbutton.png" onClick={this.wantToAsk} />
                 </div>
