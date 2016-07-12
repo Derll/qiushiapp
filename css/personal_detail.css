@@ -69,50 +69,68 @@ body{
 }
 
 #headimg{
-    padding-left: 340px;
-    width: 280px;
-    margin-top: -120px;
+    width:280px;
+    height: 280px;
 }
 
 #hostname{
+    position:relative;
     color: #333333;
-    padding-left: 390px;
-    padding-top: 24px;
-    font-size: 48px;
+    font-size: 65px;
+    width:50%;
+    margin-top:30px;
+    left:50%;
+    margin-left:-25%;
+    text-align: center;
 }
 
 .answernum_followernum{
+    position:relative;
 	color: #999999;
-	font-size:24px;
+	font-size:50px;
 	margin-top: 16px;
-	padding-left: 250px;
+    width:50%;
+    left:50%;
+    margin-left:-25%;
+    text-align: center;
 }
 
 .focusbtn{
+    position:relative;
     margin-top: 21px;
     font-size: 48px;
-    margin-left: 400px;
-    width: 157px;
+    width: 158px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: white;
     border: 5px solid #666666;
+    left:50%;
+    margin-left:-79px;
+    text-align: center;
 }
 
 .focusbtn_off{
+    position:relative;
     margin-top: 21px;
     font-size: 46px;
-    margin-left: 400px;
     width: 157px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: #666666;
     color:white;
+    left:50%;
+    margin-left:-79px;
+    text-align: center;
 }
 
 .tag{
-	margin-left: 210px;
+    position:relative;
     margin-top: 40px;
+    font-size:30px;
+    width:80%;
+    left:50%;
+    margin-left:-40%;
+    text-align: center;
 }
 
 #tagimg{
@@ -121,10 +139,14 @@ body{
 }
 
 .boxtitle{
-	padding-left: 380px;
     padding-top: 30px;
     padding-bottom: 37px;
     font-size: 48px;
+    position:relative;
+    width:100%;
+    left:50%;
+    margin-left:-50%;
+    text-align: center;
 }
 
 .boxcontent{
@@ -133,10 +155,15 @@ body{
 }
 
 .introductionContent{
-    padding: 0px 50px 30px 82px;
+    position:relative;
+    padding-top:30px;
+    padding-bottom:80px;
     font-size: 24px;
     width: 80%;
     line-height: 80px;
+    left:50%;
+    margin-left:-40%;
+    text-align: center;
 }
 
 .question{
@@ -150,6 +177,17 @@ body{
     border-width: 0.1px;
     border-color: #999999;
     line-height: 50px;
+}
+
+.headAvatar{
+    position:relative;
+    left:50%;
+    margin-left:-140px;
+    margin-top:-140px;
+    width:280px;
+    height: 280px;
+    border-radius:50%;
+    overflow: hidden;
 }
 
 .clickopen{

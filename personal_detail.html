@@ -6,6 +6,8 @@
     <script src="./react-15.1.0/build/react.js"></script>
     <script src="./react-15.1.0/build/react-dom.js"></script>
     <script src="./js/browser.min.js"></script>
+    <script src="./js/socket.io.js"></script>
+    <script src="./js/sails.io.js"></script>
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
   <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
   </head>
@@ -15,12 +17,11 @@
     </div>
     <script type="text/babel">
 
-      var PERSONINFO={
-        backimg:"./img/personal_detail/background.png", headimg:"./img/personal_detail/hosthead.png", name:"王思聪", answernum:"34", followernum:2000, tag:"网红、投资人、哲学家"
+      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家"
       }
 
       var PERSONCONTENT={
-        content: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
+        introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
       }
 
       var QUESTIONLIST=[
@@ -49,43 +50,63 @@
         {key: "10", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"}
       ];
 
+      io.sails.url="http://121.40.219.227/";
+
       var PersonBack=React.createClass({
+        // componentDidMount: function(){
+        //   var urlinfo=window.location.href; //获取当前页面的url 
+        //   var len=urlinfo.length;//获取url的长度 
+        //   var offset=urlinfo.indexOf("?"); //设置参数字符串开始的位置 
+        //   var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+        //   var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割 
+        //   var newsid=newsids[1];//得到参数值 
+        //   var newsname=newsids[0];//得到参数名字
+
+        //   io.socket.get('/professional/'+newsid, {}, (result, jwr) => {
+        //     this.setState({personInfo:result});
+        //   });
+        // },
+        componentDidMount: function(){
+          this.setState({personInfo: this.props.personInfo});
+        },
         handleClick: function(){
           this.refs.focusbtn.style.display="none";
           this.refs.focusbtn_off.style.display="inline";
           var temp=this.state.personInfo;
-          temp.followernum=this.state.personInfo.followernum+1;
+          temp.fansNum=this.state.personInfo.fansNum+1;
           this.setState({personInfo: temp});
         },
         handleClick2:function(){
           this.refs.focusbtn.style.display="inline";
           this.refs.focusbtn_off.style.display="none";
           var temp=this.state.personInfo;
-          temp.followernum=this.state.personInfo.followernum-1;
+          temp.fansNum=this.state.personInfo.fansNum-1;
           this.setState({personInfo: temp});
         },
-        getInitialState:function(){
-          return {
-            personInfo: PERSONINFO
-          };
-        },
+         getInitialState:function(){
+           return {
+             personInfo: PERSONINFO
+           };
+         },
         render: function(){
           return (
             <div className="personback">
               <div>
-                <img src={this.state.personInfo.backimg} id="backimg" />
+                <img src={this.props.personInfo.avatar} id="backimg" />
               </div>
               <div className="personbackinfo">
-                <img src={this.state.personInfo.headimg} id="headimg" />
-                <div id="hostname">{this.state.personInfo.name}</div>
+                <div className="headAvatar">
+                  <img src={this.props.personInfo.avatar} id="headimg" />
+                </div>
+                <div id="hostname">{this.props.personInfo.name}</div>
                 <div className="answernum_followernum">
-                  <div>已回答 {this.state.personInfo.answernum}   |   粉丝 {this.state.personInfo.followernum} </div>
+                  <div>已回答 {this.props.personInfo.answerNum}     粉丝 {this.state.personInfo.fansNum} </div>
                 </div>
                 <button ref="focusbtn" className="focusbtn" style={{display:"inline"}} onClick={this.handleClick}>+关注</button>
                 <button ref="focusbtn_off" className="focusbtn_off" style={{display:"none"}} onClick={this.handleClick2}>已关注</button>
                 <div className="tag">
                   <img src="./img/personal_detail/tag.png" id="tagimg" />
-                  {this.state.personInfo.tag}
+                  {this.props.personInfo.title}
                 </div>
               </div>
             </div>
@@ -98,7 +119,7 @@
           return (
             <div className="box">
               <div className="boxtitle">个人介绍</div>
-              <div className="introductionContent">{this.props.personContent.content}</div>
+              <div className="introductionContent">{this.props.personContent}</div>
             </div>
             );
         }
@@ -158,7 +179,37 @@
         }
       });
 
+      var AskList=React.createClass({
+        handleClick: function(){
+          location.href="./question_detail.html";
+        },
+        render: function(){
+          return (
+              <div onClick={this.handleClick}>
+                <div className="askercontainer">
+                  <img src={this.props.askM.headimg} id="askpersonimg" />
+                  <div className="asker">
+                    <div className="askername">{this.props.askM.name}</div>
+                    <div className="askertime">{this.props.askM.time}</div>
+                  </div>
+                </div>
+                <div>
+                  <div className="question">
+                    <div><b>Q</b>: {this.props.askM.question}</div>
+                  </div>
+                  <div className="answer">
+                    <div><b>A</b>: {this.props.askM.answer}</div>
+                  </div>
+                </div>
+              </div>
+            );
+        }
+      });
+
       var AskBox=React.createClass({
+        handleQuestion: function(){
+          location.href="./question_detail.html";
+        },
         handleClick: function(){
           this.refs.clickopen.style.display="none";
           this.setState({ askList: ASKLIST });
@@ -178,23 +229,9 @@
           this.state.askList.forEach(function(askMsg) {
             if(askMsg.key<4){
               rows_ans.push(
-              <div key={askMsg.key}>
-                <div className="askercontainer">
-                  <img src={askMsg.headimg} id="askpersonimg" />
-                  <div className="asker">
-                    <div className="askername">{askMsg.name}</div>
-                    <div className="askertime">{askMsg.time}</div>
-                  </div>
+                <div key={askMsg.key}>
+                  <AskList askM={askMsg}/>
                 </div>
-                <div>
-                  <div className="question">
-                    <div><b>Q</b>: {askMsg.question}</div>
-                  </div>
-                  <div className="answer">
-                    <div><b>A</b>: {askMsg.answer}</div>
-                  </div>
-                </div>
-              </div>
               );
             }
             else
@@ -236,6 +273,19 @@
 
 
       var DetailBox=React.createClass({
+        componentDidMount:function(){
+          var urlinfo=window.location.href; //获取当前页面的url 
+          var len=urlinfo.length;//获取url的长度 
+          var offset=urlinfo.indexOf("?"); //设置参数字符串开始的位置 
+          var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
+          var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割 
+          var newsid=newsids[1];//得到参数值 
+          var newsname=newsids[0];//得到参数名字
+
+          io.socket.get('/professional/'+newsid, {}, (result, jwr) => {
+            this.setState({userId: newsid,personInfo:result});
+          });
+        },
         wantToAsk:function(){
           this.refs.goodButton.style.display="none";
           this.refs.writeComment.style.display="block";
@@ -250,6 +300,9 @@
             return ;
           }
           alert("谢谢您的提问，请等待回答消息");
+          io.socket.get('/question/create?to='+this.state.userId+'&question='+this.state.value, {}, (result, jwr) => {
+
+          });
           /* 把问题存储进个人提问，别人待回答 */
             this.setState({ value: "" });
           this.refs.writeComment.style.display="none";
@@ -261,15 +314,17 @@
         },
         getInitialState:function(){
           return {
-            value:""
+            value: "",
+            userId:"",
+            personInfo:PERSONINFO
           };
         },
         render: function(){
           return (
             <div>
-              <PersonBack />
-              <PersonIntro personContent={PERSONCONTENT} />
-              <QuestionBox  />
+              <PersonBack personInfo={this.state.personInfo}/>
+              <PersonIntro personContent={this.state.personInfo.introduction} />
+              {/*<QuestionBox  />*/}
               <AskBox  />
               <div className="ask_comment">
                 <div ref="goodButton" className="askComment">

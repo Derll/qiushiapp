@@ -112,10 +112,27 @@
         }
       });
 
-      var Gallery = React.createClass({
-        handleClick: function(){
-          window.location.href("http://www.baidu.com");
+      var GalleryAtomic = React.createClass({
+        handleClick:function(){
+          var userId=this.props.person.id;
+          location.href="./personal_detail.html?userId="+userId;
         },
+        render: function(){
+          return (
+                <div className="gallery" onClick={this.handleClick} >
+                  <img id="gallery_img" src={this.props.person.avatar} />
+                  <div className="nameTag">
+                    <div className="name">{this.props.person.name}</div>
+                    <div className="tag">
+                      <img src="./img/tag-home.png" />{this.props.person.title}
+                    </div>
+                  </div>
+                </div>
+            );
+        }
+      });
+
+      var Gallery = React.createClass({
         componentDidMount:function(){
           io.socket.get('/professional', {}, (result, jwr) => {
             this.setState({vipList: result});
@@ -130,14 +147,8 @@
           var rows=[];
           this.state.vipList.forEach(function(vip){
             rows.push(
-              <div key={vip.id} className="gallery"  >
-                  <img id="gallery_img" src={vip.avatar} onClick={this.handleClick}/>
-                  <div className="nameTag">
-                    <div className="name">{vip.name}</div>
-                    <div className="tag">
-                      <img src="./img/tag-home.png" />{vip.title}
-                    </div>
-                  </div>
+              <div key={vip.id}>
+                <GalleryAtomic person={vip} />
               </div>
             );
           }.bind(this));
@@ -154,7 +165,7 @@
           var rows=[];
           this.props.dyAtomic.addQuestion.forEach(function(addAtomic){
             rows.push(
-              <div className="dynamicBottom">
+              <div key={addAtomic.id} className="dynamicBottom">
                 <div className="dynamicBottom-0">
                  <div className="dynamicBottom-0-0">追问</div>
                  <div className="dynamicBottom-0-1">{addAtomic.question}</div>
