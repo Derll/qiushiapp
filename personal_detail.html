@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>求士</title>
+    <script src="./react-15.1.0/build/react.js"></script>
+    <script src="./react-15.1.0/build/react-dom.js"></script>
+    <script src="./js/browser.min.js"></script>
+     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+  <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      
+    </div>
+    <script type="text/babel">
+
+      var PERSONINFO={
+        backimg:"./img/personal_detail/background.png", headimg:"./img/personal_detail/hosthead.png", name:"王思聪", answernum:"34", followernum:"2000", tag:"网红、投资人、哲学家"
+      }
+
+      var PERSONCONTENT={
+        content: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
+      }
+
+      var QUESTIONLIST=[
+        {key: "1", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "2", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "3", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "4", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "5", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "6", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "7", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "8", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "9", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
+        {key: "10", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."}
+      ];
+
+      var ASKLIST=[
+        {key: "1", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "2", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "3", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"},
+        {key: "4", name:"徐霞客", headimg:"./img/personal_detail/otherhead.png", time:"2016-11-12", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义...", commentnum:"43", watchnum:"43"}
+      ];
+
+      var PersonBack=React.createClass({
+        render: function(){
+          return (
+            <div className="personback">
+              <div>
+                <img src={this.props.personInfo.backimg} id="backimg" />
+              </div>
+              <div className="personbackinfo">
+                <img src={this.props.personInfo.headimg} id="headimg" />
+                <div id="hostname">{this.props.personInfo.name}</div>
+                <div className="answernum_followernum">
+                  <div>已回答 {this.props.personInfo.answernum}   |   粉丝 {this.props.personInfo.followernum} </div>
+                </div>
+                <button className="focusbtn">+关注</button>
+                <div className="tag">
+                  <img src="./img/personal_detail/tag.png" id="tagimg" />
+                  {this.props.personInfo.tag}
+                </div>
+              </div>
+            </div>
+            );
+        }
+      });
+
+      var PersonIntro=React.createClass({
+        render: function(){
+          return (
+            <div className="box">
+              <div className="boxtitle">个人介绍</div>
+              <div className="introductionContent">{this.props.personContent.content}</div>
+            </div>
+            );
+        }
+      });
+
+      var QuestionBox=React.createClass(
+      {
+        handleClick: function(){
+          this.setState({question: QUESTIONLIST});
+          this.refs.clickopen.style.display="none";
+          this.refs.clickClose.style.display="block";
+        },
+        handleClick2: function(){
+          var rows=[];
+          QUESTIONLIST.forEach(function(dynamicAtomic){
+            if(dynamicAtomic.key>3) return ;
+            rows.push(dynamicAtomic);
+          });
+          this.setState({question: rows});
+          this.refs.clickopen.style.display="block";
+          this.refs.clickClose.style.display="none";
+        },
+        getInitialState: function(){
+          var rows=[];
+          QUESTIONLIST.forEach(function(dynamicAtomic){
+            if(dynamicAtomic.key>3) return ;
+            rows.push(dynamicAtomic);
+          });
+          return {
+            question: rows
+          }
+        },
+        render: function(){
+          var rows=[];
+
+          this.state.question.forEach(function(dynamicAtomic){
+            rows.push(
+                <div key={dynamicAtomic.key}>
+                  <div className="question">
+                    <div>{dynamicAtomic.key} {dynamicAtomic.question}</div>
+                  </div>
+                  <p className="answer">答: {dynamicAtomic.answer}</p>
+                </div>
+              );
+          });
+
+          return (
+            <div className="box">
+              <div className="boxtitle">求士十问</div>
+                <div className="boxcontent">
+                  {rows}
+                </div>
+              <div ref="clickopen" className="clickopen" onClick={this.handleClick} >点击展开</div>
+              <div ref="clickClose" className="clickopen" onClick={this.handleClick2} style={{display:"none"}} >点击收起</div>
+            </div>
+            );
+        }
+      });
+
+      var AskBox=React.createClass({
+        render: function(){
+          var rows_ans=[];
+          this.props.askList.forEach(function(askMsg) {
+            if(askMsg.key<3){
+              rows_ans.push(
+              <div key={askMsg.key}>
+                <div className="askercontainer">
+                  <img src={askMsg.headimg} id="askpersonimg" />
+                  <div className="asker">
+                    <div className="askername">{askMsg.name}</div>
+                    <div className="askertime">{askMsg.time}</div>
+                  </div>
+                </div>
+                <div>
+                  <div className="question">
+                    <div><b>Q</b>: {askMsg.question}</div>
+                  </div>
+                  <div className="answer">
+                    <div><b>A</b>: {askMsg.answer}</div>
+                  </div>
+                </div>
+              </div>
+              );
+            }
+            else
+            {
+              rows_ans.push(
+              <div key={askMsg.key}>
+                <div className="askercontainer">
+                  <img src={askMsg.headimg} id="askpersonimg" />
+                  <div className="asker">
+                    <div className="askername">{askMsg.name}</div>
+                    <div className="askertime">{askMsg.time}</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <div className="question"><b>Q</b>: {askMsg.question}</div>
+                    <div className="askBoxer">
+                      <u className="ask">提问</u>被解答后才能观看
+                    </div>
+                  </div>
+                </div>
+              </div>
+              );
+            }
+            
+          });
+
+          return (
+            <div className="box">
+              <div className="boxtitle">大家提问</div>
+              <div  className="boxcontent">
+                {rows_ans}
+              </div>
+            </div>
+            )
+        }
+      });
+
+
+      var DetailBox=React.createClass({
+        wantToAsk:function(){
+          this.refs.goodButton.style.display="none";
+          this.refs.writeComment.style.display="block";
+        },
+        handleChange:function(){
+          this.setState({value: event.target.value});
+        },
+        sendComment:function(){
+          if(this.state.value==""){
+            this.refs.writeComment.style.display="none";
+            this.refs.goodButton.style.display="block";
+            return ;
+          }
+          alert("谢谢您的提问，请等待回答消息");
+          /* 把问题存储进个人提问，别人待回答 */
+            this.setState({ value: "" });
+          this.refs.writeComment.style.display="none";
+          this.refs.goodButton.style.display="block";
+        },
+        cancelComment:function(){
+          this.refs.writeComment.style.display="none";
+          this.refs.goodButton.style.display="block";
+        },
+        getInitialState:function(){
+          return {
+            value:""
+          };
+        },
+        render: function(){
+          return (
+            <div>
+              <PersonBack personInfo={PERSONINFO} />
+              <PersonIntro personContent={PERSONCONTENT} />
+              <QuestionBox  />
+              <AskBox askList={ASKLIST} />
+              <div className="ask_comment">
+                <div className="clickopen">点击展开</div>
+                <div ref="goodButton" className="askComment">
+                  <img id="img1" src="./img/personal_detail/askbutton.png" onClick={this.wantToAsk} />
+                </div>
+                <div ref="writeComment" className="writeComment" style={{display: "none" }} >
+                    <textarea  id="commentX" value={this.state.value} onChange={this.handleChange} />
+                    <div className="OK-button">
+                       <input id="submit" type="button" value='提交' onClick={this.sendComment} />
+                       <input id="cancel" type="button" value='取消' onClick={this.cancelComment} />
+                    </div>
+                 </div>
+              </div>
+            </div>
+            );
+        }
+      });
+
+      ReactDOM.render(
+        <DetailBox />,
+        document.getElementById("container")
+      );
+
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/personal_detail.css">
+  </body>
+</html>

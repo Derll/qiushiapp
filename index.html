@@ -30,25 +30,25 @@
       		box4: {color: "#757575", url:"./img/my.png"}
       };
       var SLIDERPIC=[
-        {key:"1", url: "./img/banner1.jpg"},
-        {key:"2", url: "./img/banner2.png"},
-        {key:"3", url: "./img/banner3.jpg"},
+        {id:"1", url: "./img/banner1.jpg"},
+        {id:"2", url: "./img/banner2.png"},
+        {id:"3", url: "./img/banner3.jpg"},
       ];
       var VIPLIST=[
-        { key:"1", url:"./img/vip1.jpg", name: "王思聪", tag: "网红、投资人、哲学家" },
-        { key:"2", url:"./img/vip2.jpg", name: "马薇薇", tag: "辩手、主持人" }
+        { id:"1", avatar:"./img/vip1.jpg", name: "王思聪", title: "网红、投资人、哲学家" },
+        { id:"2", avatar:"./img/vip2.jpg", name: "马薇薇", title: "辩手、主持人" }
       ];
       var FOCUSLIST=[
-        {key:"1", url:"./img/focus1.jpg", name:"原研哉", title:"日本设计大师", issueNum:"700", fanNum:"5000" },
-        {key:"2", url:"./img/focus2.jpg", name:"蔡康永", title:"主持人", issueNum:"32", fanNum:"365" },
-        {key:"3", url:"./img/focus3.jpg", name:"黄轩", title:"演员", issueNum:"61", fanNum:"7000"}
+        {id:"1", avatar:"./img/focus1.jpg", name:"原研哉", title:"日本设计大师", answerNum:"700", fansNum:"5000" },
+        {id:"2", avatar:"./img/focus2.jpg", name:"蔡康永", title:"主持人", answerNum:"32", fansNum:"365" },
+        {id:"3", avatar:"./img/focus3.jpg", name:"黄轩", title:"演员", answerNum:"61", fansNum:"7000"}
       ];
       var DYNAMICLIST=[
-        {key:"1", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" },
-        {key:"2", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" }
+        {id:"1", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" },
+        {id:"2", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" }
       ];
 
-      var USERDETAIL={ name: "林鹏", imgUrl: "./img/my-image.png", focusNum:"32", fanNum:"25", answerNum:"5", askNum:"32" };
+      var USERDETAIL={ name: "林鹏", imgUrl: "./img/my-image.png", focusNum:"32", fansNum:"25", answerNum:"5", askNum:"32" };
 
 
 
@@ -97,7 +97,7 @@
           var rows=[];
           this.props.sliderPic.forEach(function(pic){
             rows.push(
-              <li key={pic.key}><img src={pic.url} /></li>
+              <li key={pic.id}><img src={pic.url} /></li>
             );
           }.bind(this));
           return (
@@ -115,12 +115,12 @@
           var rows=[];
           this.props.vipList.forEach(function(vip){
             rows.push(
-              <div key={vip.key} className="gallery">
-                  <img src={vip.url} />
+              <div key={vip.id} className="gallery">
+                  <img src={vip.avatar} />
                   <div className="nameTag">
                     <div className="name">{vip.name}</div>
                     <div className="tag">
-                      <img src="./img/tag-home.png" />{vip.tag}
+                      <img src="./img/tag-home.png" />{vip.title}
                     </div>
                   </div>
               </div>
@@ -139,7 +139,7 @@
           var rows=[];
           this.props.dynamicList.forEach(function(dynamicAtomic){
             rows.push(
-              <div key={dynamicAtomic.key} className="dynamicStructure">
+              <div key={dynamicAtomic.id} className="dynamicStructure">
                 <div className="dynamicHead">
                   <img src={dynamicAtomic.url} />
                   <div className="dynamicHead-1">
@@ -175,11 +175,11 @@
       		var rows_left=[];
       		var rows_right=[];
       		this.props.focusList.forEach(function(focusPerson){
-      			if(focusPerson.key%2==1){
+      			if(focusPerson.id%2==1){
       				rows_left.push(
-      					<div key={focusPerson.key} className="focus_out_left">
+      					<div key={focusPerson.id} className="focus_out_left">
       						<div className="focus_head" >
-      							<img src={focusPerson.url} />
+      							<img src={focusPerson.avatar} />
 	      						<div className="focus_bottom row" >
 	      							<div className="focus_left col-md-8 col-sm-8">
 	      								<div className="focus_name">{focusPerson.name}</div>
@@ -187,12 +187,12 @@
 	      							</div>
 	      							<div className="focus_right col-md-4 col-sm-4">
 	      								<div className="focus_issue">
-	      									<p>{focusPerson.issueNum}</p>
+	      									<p>{focusPerson.answerNum}</p>
 	      									<p>问题</p>
 	      								</div>
 	      								<img src="./img/focus_decoration.gif"/>
 	      								<div className="focus_fan">
-	      									<p>{focusPerson.fanNum}</p>
+	      									<p>{focusPerson.fansNum}</p>
 	      									<p>粉丝</p>
 	      								</div>
 	      							</div>
@@ -202,9 +202,9 @@
       				);
       			}else{
       				rows_right.push(
-      					<div key={focusPerson.key} className="focus_out_right">
+      					<div key={focusPerson.id} className="focus_out_right">
       						<div className="focus_head" >
-      							<img src={focusPerson.url} />
+      							<img src={focusPerson.avatar} />
 	      						<div className="focus_bottom row" >
 	      							<div className="focus_left col-md-8 col-sm-8">
 	      								<div className="focus_name">{focusPerson.name}</div>
@@ -212,12 +212,12 @@
 	      							</div>
 	      							<div className="focus_right col-md-4 col-sm-4">
 	      								<div className="focus_issue">
-	      									<p>{focusPerson.issueNum}</p>
+	      									<p>{focusPerson.answerNum}</p>
 	      									<p>问题</p>
 	      								</div>
 	      								<img src="./img/focus_decoration.gif"/>
 	      								<div className="focus_fan">
-	      									<p>{focusPerson.fanNum}</p>
+	      									<p>{focusPerson.fansNum}</p>
 	      									<p>粉丝</p>
 	      								</div>
 	      							</div>
@@ -251,7 +251,7 @@
               </div>
               <div className="tab-bar">
                 <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.focusNum}</div><p>关注</p></div>
-                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.fanNum}</div><p>粉丝</p></div>
+                <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.fansNum}</div><p>粉丝</p></div>
                 <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.answerNum}</div><p>回答</p></div>
                 <div className="tab-bar-0"><div className="tab-bar-0-0">{this.props.userDetail.askNum}</div><p>提问</p></div>
               </div>

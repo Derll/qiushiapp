@@ -180,3 +180,39 @@ body{
 #img2{
 	margin-left:228px;
 }
+
+#commentX{
+	width: 90%;
+	height: 300px;
+	margin-top:50px;
+	margin-left: 4%;
+	font-size: 40px;
+}
+
+.OK-button{
+	margin-top:40px;
+	padding-bottom:60px;
+}
+
+#submit{
+	float:left;
+	width:42%;
+	height:80px;
+	font-size: 60px;
+	color:white;
+	background-color: black;
+	margin-left: 4%;
+}
+
+#cancel{
+	float:left;
+	width:42%;
+	height:80px;
+	font-size: 60px;
+	color:white;
+	background-color: black;
+	margin-left: 8%;
+}
+
+
+

@@ -116,7 +116,7 @@
 
         */
         render: function(){
-          
+
           return (
                 <div>
                 <div className="commentBox-0">
@@ -157,24 +157,88 @@
       });
 
       var DetailBox=React.createClass({
+        handleFurtherAsk: function(){
+          var newComment=prompt('请输入追问内容');
+          if(newComment!=null){
+            /* 将追问添加的我的问题中，和答主的我的回答中，以及动态中 */
+            alert("感谢追问，您的提问已经收到");
+          }
+        },
+        handleComment: function(){
+          var newComment=prompt('请输入评论内容');
+          if(newComment==null) return ;
+          var newKey=eval(this.state.commentlist).length+1;
+
+          var newItem={ key: newKey, name:"谢耳朵", url:"./img/dynamic1.png", time:"2016-1-29", like_num:"30", text: newComment };
+          var newItems=this.state.commentlist.concat([newItem]);
+          this.setState({ commentlist: newItems });
+        },
+        sendComment: function(){
+          if(this.state.value==""){
+            this.refs.writeComment.style.display="none";
+            this.refs.goodButton.style.display="block";
+            return ;
+          }
+          if(this.state.status==2){
+             var newComment=this.state.value;
+            var newKey=eval(this.state.commentlist).length+1;
+
+            var newItem={ key: newKey, name:"谢耳朵", url:"./img/dynamic1.png", time:"2016-1-29", like_num:"30", text: newComment };
+            var newItems=this.state.commentlist.concat([newItem]);
+            this.setState({ commentlist: newItems, value: "", status:"0" });
+          }else if(this.state.status==1){
+            alert("谢谢您的追问，请在个人中心审核");
+            this.setState({ value: "", status:"0" });
+          }
+          this.refs.writeComment.style.display="none";
+          this.refs.goodButton.style.display="block";
+        },
+        handleFurtherAsk:function(){
+          this.setState({ status:"1" });
+          this.refs.goodButton.style.display="none";
+          this.refs.writeComment.style.display="block";
+        },
+        handleComment2: function(){
+          this.setState({ status:"2" });
+          this.refs.goodButton.style.display="none";
+          this.refs.writeComment.style.display="block";
+        },
+        cancelComment: function(){
+          this.setState({ status:"0" });
+          this.refs.writeComment.style.display="none";
+          this.refs.goodButton.style.display="block";
+        },
         handleChange: function(num){
           return ;
           /* 首先寻找该num的文件，          */
         },
+        handleChange2: function(event) {
+          this.setState({value: event.target.value});
+        },
         getInitialState: function(){
           return {
-            commentlist: COMMENTLIST
+            dynamicList: DYNAMICLIST,
+            commentlist: COMMENTLIST,
+            value: "",
+            status: "0"
           }
         },
         render: function(){
           return (
             <div>
-                <DynamicList dynamicQuestion={DYNAMICQUESTION}  dynamicList={DYNAMICLIST} onChangeContent={this.handleChange} />
+                <DynamicList dynamicQuestion={DYNAMICQUESTION}  dynamicList={this.state.dynamicList} onChangeContent={this.handleChange} />
                 <CommentBox  commentlist={this.state.commentlist} />
-                <div className="ask_comment">
-                  <img id="img1" src="./img/question_detail_ask.png" />
-                  <img id="img2" src="./img/question_detail_comment.png" />
+                <div ref="goodButton" className="ask_comment">
+                  <img id="img1" src="./img/question_detail_ask.png" onClick={this.handleFurtherAsk} />
+                  <img id="img2" src="./img/question_detail_comment.png" onClick={this.handleComment2} />
                 </div>
+                 <div ref="writeComment" className="writeComment" style={{display: "none" }} >
+                    <textarea  id="commentX" value={this.state.value} onChange={this.handleChange2} />
+                    <div className="OK-button">
+                       <input id="submit" type="button" value='提交' onClick={this.sendComment} />
+                       <input id="cancel" type="button" value='取消' onClick={this.cancelComment} />
+                    </div>
+                 </div>
             </div>
             );
         }
