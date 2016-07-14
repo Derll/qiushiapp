@@ -17,7 +17,7 @@
     </div>
     <script type="text/babel">
 
-      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家"
+      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家",  introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
       }
 
       var PERSONCONTENT={
@@ -66,28 +66,16 @@
         //     this.setState({personInfo:result});
         //   });
         // },
-        componentDidMount: function(){
-          this.setState({personInfo: this.props.personInfo});
-        },
         handleClick: function(){
           this.refs.focusbtn.style.display="none";
           this.refs.focusbtn_off.style.display="inline";
-          var temp=this.state.personInfo;
-          temp.fansNum=this.state.personInfo.fansNum+1;
-          this.setState({personInfo: temp});
+          this.props.onChangeFans("1");
         },
         handleClick2:function(){
           this.refs.focusbtn.style.display="inline";
           this.refs.focusbtn_off.style.display="none";
-          var temp=this.state.personInfo;
-          temp.fansNum=this.state.personInfo.fansNum-1;
-          this.setState({personInfo: temp});
+          this.props.onChangeFans("2");
         },
-         getInitialState:function(){
-           return {
-             personInfo: PERSONINFO
-           };
-         },
         render: function(){
           return (
             <div className="personback">
@@ -100,7 +88,7 @@
                 </div>
                 <div id="hostname">{this.props.personInfo.name}</div>
                 <div className="answernum_followernum">
-                  <div>已回答 {this.props.personInfo.answerNum}     粉丝 {this.state.personInfo.fansNum} </div>
+                  <div>已回答 {this.props.personInfo.answerNum}     粉丝 {this.props.personInfo.fansNum} </div>
                 </div>
                 <button ref="focusbtn" className="focusbtn" style={{display:"inline"}} onClick={this.handleClick}>+关注</button>
                 <button ref="focusbtn_off" className="focusbtn_off" style={{display:"none"}} onClick={this.handleClick2}>已关注</button>
@@ -286,6 +274,16 @@
             this.setState({userId: newsid,personInfo:result});
           });
         },
+        handleClickResolved: function(num){    
+          var temp=this.state.personInfo;
+          if(num=="1"){
+            temp.fansNum=this.state.personInfo.fansNum+1;
+          }
+          else{
+            temp.fansNum=this.state.personInfo.fansNum-1;
+          }
+          this.setState({personInfo: temp});
+        },
         wantToAsk:function(){
           this.refs.goodButton.style.display="none";
           this.refs.writeComment.style.display="block";
@@ -319,7 +317,7 @@
         render: function(){
           return (
             <div>
-              <PersonBack personInfo={this.state.personInfo}/>
+              <PersonBack personInfo={this.state.personInfo} onChangeFans={this.handleClickResolved } />
               <PersonIntro personContent={this.state.personInfo.introduction} />
               {/*<QuestionBox  />*/}
               <AskBox  />
