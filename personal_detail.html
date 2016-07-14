@@ -80,7 +80,7 @@
           return (
             <div className="personback">
               <div>
-                <img src={this.props.personInfo.avatar} id="backimg" />
+                <img src={this.props.personInfo.avatar} id="backimg" className="headimg"/>
               </div>
               <div className="personbackinfo">
                 <div className="headAvatar">
@@ -237,7 +237,9 @@
                   <div>
                     <div className="question"><b>Q</b>: {askMsg.question}</div>
                     <div className="askBoxer">
-                      <u className="ask">提问</u>被解答后才能观看
+                      <div className="askItem">
+                        <u className="ask">提问</u>被解答后才能观看
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -319,7 +321,7 @@
             <div>
               <PersonBack personInfo={this.state.personInfo} onChangeFans={this.handleClickResolved } />
               <PersonIntro personContent={this.state.personInfo.introduction} />
-              {/*<QuestionBox  />*/}
+              <QuestionBox  />
               <AskBox  />
               <div className="ask_comment">
                 <div ref="goodButton" className="askComment">

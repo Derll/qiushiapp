@@ -82,6 +82,7 @@ body{
     left:50%;
     margin-left:-25%;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .answernum_followernum{
@@ -96,24 +97,24 @@ body{
 }
 
 .focusbtn{
-    position:relative;
-    margin-top: 21px;
+    position: relative;
+    margin-top: 20px;
     font-size: 48px;
-    width: 158px;
+    width: 180px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: white;
-    border: 5px solid #666666;
-    left:50%;
-    margin-left:-79px;
+    border: 2px solid #666666;
+    left: 50%;
+    margin-left: -79px;
     text-align: center;
 }
 
 .focusbtn_off{
     position:relative;
-    margin-top: 21px;
-    font-size: 46px;
-    width: 157px;
+    margin-top: 20px;
+    font-size: 48px;
+    width: 180px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: #666666;
@@ -125,7 +126,7 @@ body{
 
 .tag{
     position:relative;
-    margin-top: 40px;
+    margin-top: 50px;
     font-size:30px;
     width:80%;
     left:50%;
@@ -139,8 +140,8 @@ body{
 }
 
 .boxtitle{
-    padding-top: 30px;
-    padding-bottom: 37px;
+    padding-top: 50px;
+    padding-bottom: 30px;
     font-size: 48px;
     position:relative;
     width:100%;
@@ -150,20 +151,20 @@ body{
 }
 
 .boxcontent{
-	padding-left: 20px;
-	padding-right: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
 .introductionContent{
-    position:relative;
-    padding-top:30px;
-    padding-bottom:80px;
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 80px;
     font-size: 50px;
     width: 80%;
     line-height: 80px;
     left:50%;
-    margin-left:-40%;
-    text-align: center;
+    margin-left:-42.5%;
+    text-align: justify;
 }
 
 .question{
@@ -175,10 +176,9 @@ body{
 .answer{
 	padding-bottom: 30px;
     border-bottom-style: solid;
-    border-width: 0.1px;
+    border-width: 2px;
     border-color: #999999;
-    line-height: 60px;
-    font-size:48px;
+    line-height: 50px;
 }
 
 .headAvatar{
@@ -190,6 +190,7 @@ body{
     height: 280px;
     border-radius:50%;
     overflow: hidden;
+    border:solid 7px white;
 }
 
 .clickopen{
@@ -221,7 +222,7 @@ body{
 }
 
 .ask{
-	color: #0D964C;
+	color: red;
 	height: :140px;
 }
 
@@ -232,13 +233,14 @@ body{
 }
 
 #askpersonimg{
-	width: 140px;
+	width: 15%;
 	float: left;
 	padding-right: 26px;
 }
 
 .asker{
 	/*width:300px;*/
+    width: 80%;
 	height: 140px;
 	float: left;
 
@@ -253,24 +255,29 @@ body{
 
 .askertime{
     height: 140px;
-    float: left;
-    padding-left: 470px;
+    float: right;
     padding-top: 30px;
     font-size: 40px;
     color: #999999;
 }
 
 .askComment{
-    padding: 10px 375px;
+    position: relative;
+    padding-top: 63px;
+    width: 100%;
+    left: 50%;
+    margin-left: -50%;
+    text-align: center;
 }
 
 
 #commentX{
     width: 90%;
     height: 300px;
-    margin-top:50px;
+    margin-top: 50px;
     margin-left: 4%;
     font-size: 40px;
+    border-radius: 7px;
 }
 
 .OK-button{
@@ -279,25 +286,32 @@ body{
 }
 
 #submit{
-    float:left;
-    width:42%;
-    height:80px;
-    font-size: 60px;
-    color:white;
-    background-color: black;
+    float: left;
+    width: 42%;
+    height: 100px;
+    font-size: 50px;
+    color: white;
+    background-color: #222222;
     margin-left: 4%;
+    border-radius: 8px;
 }
 
 #cancel{
-    float:left;
-    width:42%;
-    height:80px;
-    font-size: 60px;
-    color:white;
-    background-color: black;
+    float: left;
+    width: 42%;
+    height: 100px;
+    font-size: 50px;
+    color: #333333;
+    background-color: white;
     margin-left: 8%;
+    border: solid 3px #333333;
+    border-radius: 8px;
 }
 
 .writeComment{
     padding-bottom:80px;
+}
+
+.askItem{
+    font-size: 16px;
 }
