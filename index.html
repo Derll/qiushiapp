@@ -5,9 +5,9 @@
     <title>求士</title>
     <script src="./react-15.1.0/build/react.js"></script>
     <script src="./react-15.1.0/build/react-dom.js"></script>
+    <script src="./js/browser.min.js"></script>
     <script src="./js/socket.io.js"></script>
     <script src="./js/sails.io.js"></script>
-    <script src="./js/browser.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
@@ -21,8 +21,6 @@
     <div id="container">
     </div>
     <script type="text/babel">
-      io.sails.url="http://localhost:1337";
-
       var COLORBOX={
       		box1: {color: "#0A974A", url:"./img/index-on.png"},
       		box2: {color: "#757575", url:"./img/focus.png"},
@@ -44,11 +42,15 @@
         {id:"3", avatar:"./img/focus3.jpg", name:"黄轩", title:"演员", answerNum:"61", fansNum:"7000"}
       ];
       var DYNAMICLIST=[
-        {id:"1", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" },
-        {id:"2", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", next_question:"请问如何看待互联网发展", next_answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义" }
+        {id:"1", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", addQuestion: [{id:"1", question:"请问晚上加班吗", answer:"求放过"},{id:"2", question:"请问晚上加班吗", answer:"求放过"},{id:"3", question:"请问晚上加班吗", answer:"求放过"}] },
+        {id:"2", url:"./img/dynamic1.png", name:"原研哉", title:"日本设计大师", question:"请问如何看待互联网发展", answer:"从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义", addQuestion: [{id:"1", question:"请问晚上加班吗", answer:"求放过"},{id:"2", question:"请问晚上加班吗", answer:"求放过"}] }
       ];
 
       var USERDETAIL={ name: "林鹏", imgUrl: "./img/my-image.png", focusNum:"32", fansNum:"25", answerNum:"5", askNum:"32" };
+
+
+      io.sails.url="http://121.40.219.227/";
+      
 
 
 
@@ -110,19 +112,43 @@
         }
       });
 
-      var Gallery = React.createClass({
+      var GalleryAtomic = React.createClass({
+        handleClick:function(){
+          var userId=this.props.person.id;
+          location.href="./personal_detail.html?userId="+userId;
+        },
         render: function(){
-          var rows=[];
-          this.props.vipList.forEach(function(vip){
-            rows.push(
-              <div key={vip.id} className="gallery">
-                  <img src={vip.avatar} />
+          return (
+                <div className="gallery" onClick={this.handleClick} >
+                  <img id="gallery_img" src={this.props.person.avatar} />
                   <div className="nameTag">
-                    <div className="name">{vip.name}</div>
+                    <div className="name">{this.props.person.name}</div>
                     <div className="tag">
-                      <img src="./img/tag-home.png" />{vip.title}
+                      <img src="./img/tag-home.png" />{this.props.person.title}
                     </div>
                   </div>
+                </div>
+            );
+        }
+      });
+
+      var Gallery = React.createClass({
+        componentDidMount:function(){
+          io.socket.get('/professional', {}, (result, jwr) => {
+            this.setState({vipList: result});
+          });
+        },
+        getInitialState: function(){
+          return {
+            vipList: VIPLIST
+          };
+        },
+        render: function(){
+          var rows=[];
+          this.state.vipList.forEach(function(vip){
+            rows.push(
+              <div key={vip.id}>
+                <GalleryAtomic person={vip} />
               </div>
             );
           }.bind(this));
@@ -131,6 +157,28 @@
               {rows}
             </div>
           );
+        }
+      });
+
+      var AddQuestion = React.createClass({
+        render: function(){
+          var rows=[];
+          this.props.dyAtomic.addQuestion.forEach(function(addAtomic){
+            rows.push(
+              <div key={addAtomic.id} className="dynamicBottom">
+                <div className="dynamicBottom-0">
+                 <div className="dynamicBottom-0-0">追问</div>
+                 <div className="dynamicBottom-0-1">{addAtomic.question}</div>
+                </div>
+                <p>A: {addAtomic.answer}</p>
+              </div>
+              );
+          });
+          return (
+            <div>
+              {rows}
+            </div>
+           )
         }
       });
 
@@ -151,13 +199,7 @@
                   <p>Q: {dynamicAtomic.question}</p>
                   <p>A: {dynamicAtomic.answer}</p>
                 </div>
-                <div className="dynamicBottom">
-                  <div className="dynamicBottom-0">
-                    <div className="dynamicBottom-0-0">追问</div>
-                    <div className="dynamicBottom-0-1">{dynamicAtomic.next_question}</div>
-                  </div>
-                  <p>A: {dynamicAtomic.next_answer}</p>
-                </div>
+                <AddQuestion dyAtomic={dynamicAtomic} />
               </div>
               );
           });

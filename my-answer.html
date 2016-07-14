@@ -30,7 +30,6 @@
           handleClick: function(num){
               if(this.props.boxNum==1) return ;
               else {this.props.onChangeBox()};
-
           },
           handleClick2: function(num){
               if(this.props.boxNum==2) return ;
@@ -59,7 +58,7 @@
           },
           render: function(){
             return(
-              <div>
+              <div className="top">
                 <input type="button" value="未回答" id="button1" onClick={this.handleClick} ref="button1" style={{color: "white",
   backgroundColor: "#0A964C",border: "none"}}/>
                 <input type="button" value="已回答" id="button2" onClick={this.handleClick2} ref="button2" style={{color: "#0A964C",
@@ -105,24 +104,35 @@ var CommentBox=React.createClass({
         }
       });
 
+        var QuestionAtomic=React.createClass({
+          handleClick: function(){
+            this.props.
+          },
+          render: function(){
+            return (
+              <div key={this.props.commentMsg.key}>
+                  <div className="commentBox-0" onClick={this.handleClick}>
+                    <img src={commentMsg.url} />
+                    <div className="commentBox-0-1">
+                      <div className="commentBox-0-1-0">{this.props.commentMsg.name}</div>
+                    </div>
+                    <div className="commentBox-0-2">
+                      <div className="commentBox-0-2-1">{this.props.commentMsg.time}</div>
+                    </div>
+                  </div>
+                  <div className="commentBox-1">Q:{this.props.commentMsg.content}</div>
+                  
+                </div>
+              );
+          }
+        });
+
         var QuestionBox=React.createClass({
             render: function(){
             var rows=[];
-            this.props.questionlist.forEach(function(commentMsg){
+            this.props.questionlist.forEach(function(cM){
               rows.push(
-                <div key={commentMsg.key}>
-                  <div className="commentBox-0">
-                    <img src={commentMsg.url} />
-                    <div className="commentBox-0-1">
-                      <div className="commentBox-0-1-0">{commentMsg.name}</div>
-                    </div>
-                    <div className="commentBox-0-2">
-                      <div className="commentBox-0-2-1">{commentMsg.time}</div>
-                    </div>
-                  </div>
-                  <div className="commentBox-1">Q:{commentMsg.content}</div>
-                  
-                </div>
+                <QuestionAtomic commentMsg={cM} />
                 );
             });
             return (
@@ -132,6 +142,9 @@ var CommentBox=React.createClass({
         });
 
   			var QuestionList=React.createClass({
+          handleStatus: function(){
+
+          },
           handleChange: function(){
             if(this.state.boxNum==1) this.setState({boxNum:"2"});
             else this.setState({boxNum:"1"});
@@ -158,7 +171,7 @@ var CommentBox=React.createClass({
 			            <div>
                     <TabBar boxNum={this.state.boxNum} onChangeBox={this.handleChange}/>
                     <div style={{display:"block"}} ref="tab1" >
-                      <QuestionBox questionlist={QUESTIONUNRESERVED}/>
+                      <QuestionBox questionlist={QUESTIONUNRESERVED} onChangeStatus={this.handleStatus} />
                     </div>
                     <div style={{display:"none"}} ref="tab2" >
 			                 <CommentBox commentlist={QUESTIONRESERVED}/>
