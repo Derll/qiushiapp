@@ -162,11 +162,10 @@ body{
 }
 
 .focus_out_left{
-	position: relative;
-    font-family: "PingHei";
-    color: white;
-    margin-left: auto;
-    padding-top: 20px;
+	position:relative;
+	font-family: "PingHei";
+	color:white;
+	margin-left:auto;
 }
 
 .focus_out_right{
@@ -174,7 +173,6 @@ body{
 	font-family: "PingHei";
 	color:white;
 	margin-left:auto;
-	padding-top: 20px;
 }
 
 .focus_head{
@@ -210,20 +208,11 @@ body{
 .focus_title{
 	top:40px;
 	font-size:21px;
-	padding-left: 12px;
-}
-
-.focus_left{
-	width: 50%;
-    float: left;
 }
 
 .focus_right{
-    font-size: 18px;
-    margin-top: 24px;
-    width: 50%;
-    float: left;
-    padding-left: 100px;
+	font-size:18px;
+	margin-top:24px;
 }
 
 .focus_issue{
@@ -244,11 +233,8 @@ body{
 	float:left;
 }
 
-#focus{
-	font-size: 48px;
-    padding-top: 24px;
-    border-bottom: solid 0.1px #999999;
-    text-align: center; 
+#focus p{
+	padding-left 45%: 
 }
 
 .dynamicClass{
@@ -414,18 +400,4 @@ body{
 
 #gallery_img{
 	width:100%;
-}
-
-.rows_left{
-	width: 50%;
-    /* margin-left: 20px; */
-    padding-left: 20px;
-    float: left;
-}
-
-.rows_right{
-	width: 50%;
-    /* margin-left: 20px; */
-    padding-right: 20px;
-    float: right;
 }
