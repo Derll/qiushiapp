@@ -219,15 +219,15 @@
       		this.props.focusList.forEach(function(focusPerson){
       			if(focusPerson.id%2==1){
       				rows_left.push(
-      					<div key={focusPerson.id} className="focus_out_left">
+      					<div key={focusPerson.id} className="focus_out_right">
       						<div className="focus_head" >
       							<img src={focusPerson.avatar} />
 	      						<div className="focus_bottom row" >
-	      							<div className="focus_left col-md-8 col-sm-8">
+	      							<div className="focus_left">
 	      								<div className="focus_name">{focusPerson.name}</div>
 	      								<div className="focus_title">{focusPerson.title}</div>
 	      							</div>
-	      							<div className="focus_right col-md-4 col-sm-4">
+	      							<div className="focus_right">
 	      								<div className="focus_issue">
 	      									<p>{focusPerson.answerNum}</p>
 	      									<p>问题</p>
@@ -248,11 +248,11 @@
       						<div className="focus_head" >
       							<img src={focusPerson.avatar} />
 	      						<div className="focus_bottom row" >
-	      							<div className="focus_left col-md-8 col-sm-8">
+	      							<div className="focus_left">
 	      								<div className="focus_name">{focusPerson.name}</div>
 	      								<div className="focus_title">{focusPerson.title}</div>
 	      							</div>
-	      							<div className="focus_right col-md-4 col-sm-4">
+	      							<div className="focus_right">
 	      								<div className="focus_issue">
 	      									<p>{focusPerson.answerNum}</p>
 	      									<p>问题</p>
@@ -271,12 +271,12 @@
       		}.bind(this));
       		return (
       			<div>
-	      			<div id="focus" className="span1">
-	                  <p>全 部</p>
-	                </div>
-	      			<div className="rows row">
-	      				<div className="rows_left col-md-6 col-sm-6 ">{rows_left}</div>
-	      				<div className="rows_right col-md-6 col-sm-6">{rows_right}</div>
+	      			<div id="focus">
+                <p>全 部</p>
+              </div>
+              <div className="">
+                <div className="rows_left">{rows_left}</div>
+                <div className="rows_right">{rows_right}</div>
 	      			</div>
       			</div>
       		);
