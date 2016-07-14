@@ -69,11 +69,8 @@ body{
 }
 
 #headimg{
-    /*width:280px;
-    height: 280px;*/
-    border-radius: 50%;
-    margin-left: -50%;
-    border: solid 0px white;
+    width:280px;
+    height: 280px;
 }
 
 #hostname{
@@ -96,28 +93,27 @@ body{
     left:50%;
     margin-left:-25%;
     text-align: center;
-    padding-bottom: 20px;
 }
 
 .focusbtn{
-    position: relative;
-    margin-top: 20px;
+    position:relative;
+    margin-top: 21px;
     font-size: 48px;
-    width: 180px;
+    width: 158px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: white;
-    border: 2px solid #666666;
-    left: 50%;
-    margin-left: -79px;
+    border: 5px solid #666666;
+    left:50%;
+    margin-left:-79px;
     text-align: center;
 }
 
 .focusbtn_off{
     position:relative;
-    margin-top: 20px;
-    font-size: 48px;
-    width: 180px;
+    margin-top: 21px;
+    font-size: 46px;
+    width: 157px;
     height: 85px;
     -webkit-border-radius: 20px;
     background: #666666;
@@ -129,7 +125,7 @@ body{
 
 .tag{
     position:relative;
-    margin-top: 50px;
+    margin-top: 40px;
     font-size:30px;
     width:80%;
     left:50%;
@@ -143,8 +139,8 @@ body{
 }
 
 .boxtitle{
-    padding-top: 50px;
-    padding-bottom: 30px;
+    padding-top: 30px;
+    padding-bottom: 37px;
     font-size: 48px;
     position:relative;
     width:100%;
@@ -154,33 +150,35 @@ body{
 }
 
 .boxcontent{
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .introductionContent{
-    position: relative;
-    padding-top: 30px;
-    padding-bottom: 80px;
-    font-size: 24px;
+    position:relative;
+    padding-top:30px;
+    padding-bottom:80px;
+    font-size: 50px;
     width: 80%;
     line-height: 80px;
-    left: 50%;
-    margin-left: -42.5%;
-    text-align: justify;
+    left:50%;
+    margin-left:-40%;
+    text-align: center;
 }
 
 .question{
 	color: #0D964C;
     padding-bottom: 25px;
+    font-size: 48px;
 }
 
 .answer{
 	padding-bottom: 30px;
     border-bottom-style: solid;
-    border-width: 2px;
+    border-width: 0.1px;
     border-color: #999999;
-    line-height: 50px;
+    line-height: 60px;
+    font-size:48px;
 }
 
 .headAvatar{
@@ -192,30 +190,38 @@ body{
     height: 280px;
     border-radius:50%;
     overflow: hidden;
-    border: solid 7px white;
 }
 
 .clickopen{
+    position:relative;
 	color: #0D964C;
     padding-top: 20px;
     padding-bottom: 30px;
-    padding-left: 390px;
+    width:100%;
+    font-size:35px;
+    left:50%;
+    margin-left:-50%;
+    text-align:center;
 }
 
 .askBoxer{
+    position:relative;
     color:#999999;
-    font-size:20px;
+    font-size:48px;
     border-bottom-style: solid;
-    border-width: 2px;
+    border-width: 0.1px;
     border-color: #999999;
     line-height: 50px;
-    padding-top:30px;
+    padding-top:80px;
     padding-bottom: 50px;
-    padding-left:240px;
+    width:100%;
+    left:50%;
+    margin-left:-50%;
+    text-align: center;
 }
 
 .ask{
-	color: red;
+	color: #0D964C;
 	height: :140px;
 }
 
@@ -226,13 +232,13 @@ body{
 }
 
 #askpersonimg{
-	width: 15%;
+	width: 140px;
 	float: left;
 	padding-right: 26px;
 }
 
 .asker{
-	width:80%;
+	/*width:300px;*/
 	height: 140px;
 	float: left;
 
@@ -247,25 +253,24 @@ body{
 
 .askertime{
     height: 140px;
-    float: right;
-    /*padding-left: 470px;*/
+    float: left;
+    padding-left: 470px;
     padding-top: 30px;
-    font-size: 32px;
+    font-size: 40px;
     color: #999999;
 }
 
 .askComment{
-    padding: 63px 375px 75px 375px;
+    padding: 10px 375px;
 }
 
 
 #commentX{
     width: 90%;
     height: 300px;
-    margin-top: 50px;
+    margin-top:50px;
     margin-left: 4%;
     font-size: 40px;
-    border-radius: 7px;
 }
 
 .OK-button{
@@ -274,32 +279,25 @@ body{
 }
 
 #submit{
-    float: left;
-    width: 42%;
-    height: 100px;
-    font-size: 50px;
-    color: white;
-    background-color: #222222;
+    float:left;
+    width:42%;
+    height:80px;
+    font-size: 60px;
+    color:white;
+    background-color: black;
     margin-left: 4%;
-    border-radius: 8px;
 }
 
 #cancel{
-    float: left;
-    width: 42%;
-    height: 100px;
-    font-size: 50px;
-    color: #333333;
-    background-color: white;
+    float:left;
+    width:42%;
+    height:80px;
+    font-size: 60px;
+    color:white;
+    background-color: black;
     margin-left: 8%;
-    border: solid 3px #333333;
-    border-radius: 8px;
 }
 
 .writeComment{
     padding-bottom:80px;
-}
-
-.askItem{
-    font-size: 16px;
 }
