@@ -8,6 +8,7 @@
     <script src="./js/browser.min.js"></script>
      <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  <script src="./js/artEditor.min.js" ></script>
   </head>
   <body>
     <div id="container">
@@ -233,7 +234,10 @@
                   <img id="img2" src="./img/question_detail_comment.png" onClick={this.handleComment2} />
                 </div>
                  <div ref="writeComment" className="writeComment" style={{display: "none" }} >
+                    {/*
                     <textarea  id="commentX" value={this.state.value} onChange={this.handleChange2} />
+                    */}
+                    <div className="article-content" id="content"></div>
                     <div className="OK-button">
                        <input id="submit" type="button" value='提交' onClick={this.sendComment} />
                        <input id="cancel" type="button" value='取消' onClick={this.cancelComment} />
@@ -248,6 +252,26 @@
         <DetailBox />,
         document.getElementById("container")
       );
+    </script>
+    <script type="text/javascript">
+      $('#content').artEditor({
+        imgTar: '#imageUpload',
+        limitSize: 5,   // 兆
+        showServer: false,
+        uploadUrl: '',
+        data: {},
+        uploadField: 'image',
+        placeholader: '<p>请输入文章正文内容</p>',
+        validHtml: ["br"],
+        uploadSuccess: function(res) {
+            // return img url
+            return res.path;
+        },
+        uploadError: function(res) {
+            // something error
+            console.log(res);
+        }
+    });
     </script>
     <link rel="stylesheet" ty994929pe="text/css" href="css/question_detail.css">
   </body>
