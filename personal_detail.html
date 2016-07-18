@@ -17,12 +17,12 @@
     </div>
     <script type="text/babel">
 
-      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家",  introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
-      }
+      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家",  introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事",qiushiQuestions:[]
+      };
 
       var PERSONCONTENT={
         introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
-      }
+      };
 
       var QUESTIONLIST=[
         {key: "1", question: "请问如何看待互联网发展", answer: "从2009年以来，11月11日这个日子在中国互联网界甚至整个中国社会，都被赋予了新的意义..."},
@@ -141,9 +141,15 @@
           }
         },
         render: function(){
+          var temp=[];
           var rows=[];
+          console.log(this.props.person_info);
+          this.props.person_info.qiushiQuestions.forEach(function(dynamicAtomic){
+            if(dynamicAtomic.key>3) return ;
+            temp.push(dynamicAtomic);
+          });
 
-          this.state.question.forEach(function(dynamicAtomic){
+          temp.forEach(function(dynamicAtomic){
             rows.push(
                 <div key={dynamicAtomic.key}>
                   <div className="question">
@@ -195,9 +201,6 @@
       });
 
       var AskBox=React.createClass({
-        handleQuestion: function(){
-          location.href="./question_detail.html";
-        },
         handleClick: function(){
           this.refs.clickopen.style.display="none";
           this.setState({ askList: ASKLIST });
@@ -268,12 +271,18 @@
           var len=urlinfo.length;//获取url的长度 
           var offset=urlinfo.indexOf("?"); //设置参数字符串开始的位置 
           var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
-          var newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割 
+          var Ids=newsidinfo.split("&");
+          var firstId=Ids[0];
+          var newsids=firstId.split("=");//对获得的参数字符串按照“=”进行分割 
           var newsid=newsids[1];//得到参数值 
           var newsname=newsids[0];//得到参数名字
+          var secondId=Ids[1];
+          var personIds=secondId.split("=");
+          var personId=personIds[1];
+          var personname=personIds[0];
 
           io.socket.get('/professional/'+newsid, {}, (result, jwr) => {
-            this.setState({userId: newsid,personInfo:result});
+            this.setState({personId: newsid,personInfo:result,userId:personId});
           });
         },
         handleClickResolved: function(num){    
@@ -294,12 +303,17 @@
           this.setState({value: event.target.value});
         },
         sendComment:function(){
-          if(this.state.value==""){
+          var tempQuestion=this.refs.duihuakuang.value;
+          if(tempQuestion==""){
             this.refs.writeComment.style.display="none";
             this.refs.goodButton.style.display="block";
             return ;
           }
-          alert("谢谢您的提问，请等待回答消息");
+          io.socket.post('/question/ask',{from:this.state.userId, to:this.state.personInfo.id, question: tempQuestion}, (result, jwr) => {
+            alert(this.state.userId);
+            alert(tempQuestion);
+            alert("感谢您的提问！");
+          });
           /* 把问题存储进个人提问，别人待回答 */
           this.setState({ value: "" });
           this.refs.writeComment.style.display="none";
@@ -312,8 +326,9 @@
         getInitialState:function(){
           return {
             value: "",
-            userId:"",
-            personInfo:PERSONINFO
+            personId: "",
+            personInfo: PERSONINFO,
+            userId: ""
           };
         },
         render: function(){
@@ -321,14 +336,14 @@
             <div>
               <PersonBack personInfo={this.state.personInfo} onChangeFans={this.handleClickResolved } />
               <PersonIntro personContent={this.state.personInfo.introduction} />
-              <QuestionBox  />
+              <QuestionBox  person_info={this.state.personInfo} />
               <AskBox  />
               <div className="ask_comment">
                 <div ref="goodButton" className="askComment">
                   <img id="img1" src="./img/personal_detail/askbutton.png" onClick={this.wantToAsk} />
                 </div>
                 <div ref="writeComment" className="writeComment" style={{display: "none" }} >
-                    <textarea  id="commentX" value={this.state.value} onChange={this.handleChange} />
+                    <textarea  ref="duihuakuang" id="commentX" value={this.state.value} onChange={this.handleChange} />
                     <div className="OK-button">
                        <input id="submit" type="button" value='提交' onClick={this.sendComment} />
                        <input id="cancel" type="button" value='取消' onClick={this.cancelComment} />

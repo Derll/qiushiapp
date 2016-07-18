@@ -16,6 +16,7 @@
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/flexslider.css" />
   <script type="text/javascript" src="./js/jquery.flexslider-min.js"></script>
+  <!-- <script src="./js/react-cookie.min.js"></script> -->
   </head>
   <body>
     <div id="container">
@@ -26,6 +27,8 @@
       		box2: {color: "#757575", url:"./img/focus.png"},
       		box3: {color: "#757575", url:"./img/dynamic.png"},
       		box4: {color: "#757575", url:"./img/my.png"}
+      };
+      var PERSONINFO={ avatar:"./img/personal_detail/hosthead.png", name:"王思聪", answerNum:"34", fansNum:2000, title:"网红、投资人、哲学家",  introduction: "王思聪，1988年1月3日出生于辽宁省大连市，毕业于伦敦大学学院哲学系，[1] 万达集团董事长王健林的独子，北京普思投资有限公司董事长、IG电子竞技俱乐部创始人、万达集团董事"
       };
       var SLIDERPIC=[
         {id:"1", url: "./img/banner1.jpg"},
@@ -114,8 +117,9 @@
 
       var GalleryAtomic = React.createClass({
         handleClick:function(){
-          var userId=this.props.person.id;
-          location.href="./personal_detail.html?userId="+userId;
+          var personId=this.props.person.id;
+          var userId=this.props.user_id;
+          location.href="./personal_detail.html?personId="+personId+"&userId="+userId;
         },
         render: function(){
           return (
@@ -148,7 +152,7 @@
           this.state.vipList.forEach(function(vip){
             rows.push(
               <div key={vip.id}>
-                <GalleryAtomic person={vip} />
+                <GalleryAtomic person={vip} user_id={this.props.user_id}/>
               </div>
             );
           }.bind(this));
@@ -349,7 +353,7 @@
                       <p>筛选</p>
                   </div> 
                 </div> */ }
-                <Gallery vipList={VIPLIST} />
+                <Gallery vipList={VIPLIST} user_id={this.props.user_id}/>
               </div>
               <div ref="focus">
                   <FocusPage focusList={FOCUSLIST} />
@@ -420,6 +424,27 @@
       });      
 
       var Screen = React.createClass({
+        componentDidMount: function(){
+          var fso, f, s;
+          var urlinfo=window.location.href; //获取当前页面的url 
+          var len=urlinfo.length;//获取url的长度 
+          var offset=urlinfo.indexOf("?"); //设置参数字符串开始的位置 
+          var newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 
+          var openId;
+          if(newsidinfo.length!=0){
+            var openIds=newsidinfo.split("=");
+             openId=openIds[1];
+          }
+          else{
+            openId="0";
+          }
+          io.socket.get('/professional/openID', {openid:openId}, (result, jwr) => {
+            this.setState({personInfo: result[0],userId:result[0].id});
+            // document.cookie="userName="+result[0].name+";userImage="+result[0].avatar;
+
+            
+          });
+        },
         handleChangeBox: function(num){
           if(num==1){
             this.setState({
@@ -466,13 +491,15 @@
         getInitialState: function() {
           return {
             boxNum: "1",
-            colorBox: COLORBOX
+            colorBox: COLORBOX,
+            personInfo: PERSONINFO,
+            userId:""
           };
         },
         render: function(){
           return (
             <div className="outSider">
-            <ContentBox  boxNum={this.state.boxNum}/>
+            <ContentBox  boxNum={this.state.boxNum} user_id={this.state.userId}/>
             <SlideBar colorBox={this.state.colorBox} onChangeBox={this.handleChangeBox}/>
             </div>
           );
