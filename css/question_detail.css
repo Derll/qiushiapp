@@ -41,10 +41,11 @@ body{
 
 .dynamicBody{
 	clear: both;
-	font-size: 30px;
+	font-size: 48px;
 	color: #666666;
 	margin-left: 40px;
 	padding-top:20px;
+	padding-right:50px;
 }
 
 .dynamicBody p{
@@ -52,10 +53,11 @@ body{
 }
 
 .dynamicBottom{
-	font-size: 40px;
+	font-size: 48px;
 	color: #666666;
 	margin-left: 60px;
 	padding-top:20px;
+	padding-right:50px;
 }
 
 .dynamicBottom-0-0{
@@ -135,6 +137,7 @@ body{
 	padding-bottom: 30px;
 	padding-top:20px;
 	margin-left:180px;
+	font-size:48px;
 	color: #333333;
 }
 
